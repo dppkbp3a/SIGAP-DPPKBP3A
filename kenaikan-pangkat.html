@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenaikan Pangkat - SIGAP DPPKBP3A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col justify-between shrink-0">
+            <div>
+                <!-- Brand -->
+                <div class="h-16 flex items-center px-6 bg-slate-950 text-white font-bold text-lg gap-3">
+                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+                    <span>SIGAP DPPKBP3A</span>
+                </div>
+                <!-- Nav Links -->
+                <nav class="p-4 space-y-1 text-sm">
+                    <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-chart-pie w-5"></i> Dashboard
+                    </a>
+                    <a href="datapegawai.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-users-gear w-5"></i> Data Pegawai
+                    </a>
+                    <a href="duk.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-id-card w-5"></i> DUK
+                    </a>
+                    <a href="kenaikan-pangkat.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-medium">
+                        <i class="fa-solid fa-arrow-up-right-dots w-5"></i> Kenaikan Pangkat
+                    </a>
+                    <a href="penghargaan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-award w-5"></i> Penghargaan
+                    </a>
+                    <a href="pensiun.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-user-xmark w-5"></i> Pensiun
+                    </a>
+                    <a href="laporan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-file-lines w-5"></i> Laporan
+                    </a>
+                </nav>
+            </div>
+            <!-- Settings & Logout -->
+            <div class="p-4 border-t border-slate-800 space-y-1">
+                <a href="pengaturan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-gear w-5"></i> Pengaturan
+                </a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-right-from-bracket w-5"></i> Keluar
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- Top Navbar -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 sticky top-0">
+                <div class="flex items-center gap-4">
+                    <span class="font-semibold text-gray-700">Monitoring Kenaikan Pangkat Pegawai</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800">Admin DPPKBP3A</p>
+                        <p class="text-xs text-gray-500">NIP. 19850101XXXXXXXXXX</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                        A
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Kenaikan Pangkat -->
+            <main class="p-6">
+                <!-- Header Actions -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Jadwal Kenaikan Pangkat (KP)</h2>
+                        <p class="text-sm text-gray-500">Monitoring periode TMT Kenaikan Pangkat Terakhir dan Kenaikan Pangkat Berikutnya.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="window.print()" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg font-medium text-sm hover:bg-gray-50 shadow-sm flex items-center gap-2 transition">
+                            <i class="fa-solid fa-print text-blue-600"></i> Cetak Jadwal KP
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Highlight Stat Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-red-600 font-medium">Perlu Ditindaklanjuti (Sudah Lewat)</p>
+                            <h3 class="text-2xl font-bold text-red-700 mt-1" id="statOverdue">0</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold animate-pulse">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-amber-700 font-medium">Segera Diusulkan (Tahun Ini)</p>
+                            <h3 class="text-2xl font-bold text-amber-700 mt-1" id="statThisYear">0</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-blue-600 font-medium">Masih Cukup Lama (Akan Datang)</p>
+                            <h3 class="text-2xl font-bold text-blue-700 mt-1" id="statUpcoming">0</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter & Search Bar -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <div class="relative w-full md:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                        <input type="text" id="searchInput" placeholder="Cari NIP, Nama, GolRu, atau Jabatan..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="text-xs text-gray-500 font-medium w-full md:w-auto text-right">
+                        Menampilkan <strong id="kpCount" class="text-gray-800">0</strong> Pegawai
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 text-white text-xs uppercase font-semibold">
+                                    <th class="py-3.5 px-4 text-center">No</th>
+                                    <th class="py-3.5 px-4">NIP & Nama Pegawai</th>
+                                    <th class="py-3.5 px-4 text-center">Gol/Ruang</th>
+                                    <th class="py-3.5 px-4">Jabatan & Unit Kerja</th>
+                                    <th class="py-3.5 px-4 text-center">KP Terakhir</th>
+                                    <th class="py-3.5 px-4 text-center">KP Berikutnya</th>
+                                    <th class="py-3.5 px-4 text-center">Status KP</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kpTableBody" class="divide-y divide-gray-200 text-sm text-gray-700">
+                                <!-- Data akan dirender otomatis via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const dataKP = [
+            { "no": 1, "nip": "19700810 199002 1 001", "nama": "H. APIP ROPI'I, Ners, S.Sos, S.KM, MMKes.", "golru": "IV/b", "jabatan": "Kepala Dinas", "unit": "Dinas Pengendalian Penduduk, Keluarga Berencana, Pemberdayaan Perempuan dan Perlindungan Anak", "kp_terakhir": "2026-02-01", "kp_berikutnya": "2030-02-01" },
+            { "no": 2, "nip": "19720301 200604 1 011", "nama": "dr. EDDY SYARIEF, MM., MM.RS.", "golru": "IV/b", "jabatan": "Sekretaris Dinas", "unit": "Sekretariat", "kp_terakhir": "2026-04-01", "kp_berikutnya": "2030-04-01" },
+            { "no": 3, "nip": "19791029 200501 1 003", "nama": "ANWAR NASIHIN, S.Kom., M.Si.", "golru": "IV/a", "jabatan": "Kepala Bidang Keluarga Sejahtera", "unit": "Bidang Keluarga Sejahtera", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 4, "nip": "19810602 200801 1 006", "nama": "ANTON SUPRAPTO, S.Kep.Ners. ,M.K.M.", "golru": "IV/a", "jabatan": "Kepala Bidang Pengendalian Penduduk", "unit": "Bidang Pengendalian Penduduk", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 5, "nip": "19741110 200801 1 018", "nama": "H. NOVI PRIHAWAN, A.KS.", "golru": "III/d", "jabatan": "Kepala Bidang Keluarga Berencana", "unit": "Bidang Keluarga Berencana", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 6, "nip": "19760504 199901 2 001", "nama": "IJAH HODIJAH, SE.", "golru": "III/d", "jabatan": "Kepala Bidang Pemberdayaan Perempuan dan Perlindungan Anak", "unit": "Bidang Pemberdayaan Perempuan dan Perlindungan Anak", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 7, "nip": "19680823 199312 1 001", "nama": "Drs. NANANG JUHANA", "golru": "IV/a", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Garawangi", "kp_terakhir": "2025-12-01", "kp_berikutnya": "2029-12-01" },
+            { "no": 8, "nip": "19680911 199003 1 006", "nama": "KOMARUDIN, SKM., MMKes.", "golru": "IV/a", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Jalaksana", "kp_terakhir": "2026-03-01", "kp_berikutnya": "2030-03-01" },
+            { "no": 9, "nip": "19780416 200901 2 003", "nama": "EUIS KOMARIAH, S.Pd., M.M.", "golru": "IV/a", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Luragung", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 10, "nip": "19690215 199003 1 003", "nama": "YAYAT SUDRAJAT, S.Pd.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Ciawigebang", "kp_terakhir": "2026-03-01", "kp_berikutnya": "2030-03-01" },
+            { "no": 11, "nip": "19780627 200604 2 017", "nama": "INDRIASARI, S.Kep., Ners.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Kadugede", "kp_terakhir": "2026-04-01", "kp_berikutnya": "2030-04-01" },
+            { "no": 12, "nip": "19770205 200801 1 007", "nama": "DIDIN AWALUDIN, S.Pd..", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Cilimus", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 13, "nip": "19811104 200801 2 009", "nama": "DINI NOVIANTI RATNA JUWITA, SE.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Lebakwangi", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 14, "nip": "19780502 200801 2 009", "nama": "SITI NURJANAH, SE.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Darma", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 15, "nip": "19730203 201001 1 001", "nama": "SAID, SH.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Mandirancan", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 16, "nip": "19880718 201411 2 001", "nama": "dr. ADHIANI KOESMAN", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Perlindungan Perempuan dan Anak", "kp_terakhir": "2026-11-01", "kp_berikutnya": "2030-11-01" },
+            { "no": 17, "nip": "19720210 200801 1 004", "nama": "ERO JUHARA, S.AP.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Cidahu", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 18, "nip": "19811025 200501 1 006", "nama": "DENI WAHYUDI PRIADI, SKM., M.A.P..", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Cibingbin", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 19, "nip": "19780516 201001 2 001", "nama": "YOYOM SITI MARIAM, S.IP.", "golru": "III/d", "jabatan": "Kepala UPTD", "unit": "UPTD Pengendalian Penduduk Kuningan", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 20, "nip": "19811110 200604 2 007", "nama": "NOPA PUJIHASTUTI, SE., M.A.P.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Umum dan Kepegawaian", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-04-01", "kp_berikutnya": "2030-04-01" },
+            { "no": 21, "nip": "19730619 200801 2 006", "nama": "ETI SUARTI, SE., M.Si.", "golru": "IV/a", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Jalaksana - UPTD Pengendalian Penduduk Jalaksana", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 22, "nip": "19700127 199503 2 002", "nama": "Dra. NARUL HAYATI", "golru": "III/d", "jabatan": "Kepala UPTD Pengendalian Penduduk Cigugur", "unit": "UPTD Pengendalian Penduduk Cigugur", "kp_terakhir": "2023-03-01", "kp_berikutnya": "2027-03-01" },
+            { "no": 23, "nip": "19710831 200003 2 003", "nama": "NUNUNG NURZAENAH, SE.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Kuningan - UPTD Pengendalian Penduduk Kuningan", "kp_terakhir": "2024-03-01", "kp_berikutnya": "2028-03-01" },
+            { "no": 24, "nip": "19760823 200801 1 004", "nama": "DIKDIK MEDIAGUSDIANA, SE..", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Mandirancan - UPTD Pengendalian Penduduk Mandirancan", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 25, "nip": "19831209 200901 2 002", "nama": "SRI YATI, SE.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Ciawigebang - UPTD Pengendalian Penduduk Ciawigebang", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 26, "nip": "19821211 201101 1 001", "nama": "HENDRA SUHENDRA, S.Sos.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Cibingbin - UPTD Pengendalian Penduduk Cibingbin", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 27, "nip": "19750716 200801 1 005", "nama": "JAJANG JARKASIH, S.AP.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Cidahu - UPTD Pengendalian Penduduk Cidahu", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 28, "nip": "19750409 200801 2 007", "nama": "EUIS NURMALA, SE.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Sub Bagian Tata Usaha UPTD Perlindungan Perempuan dan Anak - UPTD Perlindungan Perempuan dan Anak", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 29, "nip": "19720720 200701 1 013", "nama": "UDIN MAHRUDIN, S.Sos.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Luragung - UPTD Pengendalian Penduduk Luragung", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 30, "nip": "19830620 200901 2 006", "nama": "NINA NURAFNI, S.Pd.", "golru": "III/d", "jabatan": "Kepala UPTD Pengendalian Penduduk Ciwaru", "unit": "UPTD Pengendalian Penduduk Ciwaru", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 31, "nip": "19800802 200901 2 002", "nama": "ELIS KARMANAH, S.Pd.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Darma - UPTD Pengendalian Penduduk Darma", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 32, "nip": "19741228 200701 2 009", "nama": "YENI MULYATI, SE.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Garawangi - UPTD Pengendalian Penduduk Garawangi", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 33, "nip": "19740823 201001 1 001", "nama": "MAS`UD, SE.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Lebakwangi - UPTD Pengendalian Penduduk Lebakwangi", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 34, "nip": "19760404 200701 1 013", "nama": "MAMAN SULAEMAN, S.IP., M.A.P..", "golru": "III/d", "jabatan": "Kepala UPTD Pengendalian Penduduk Kramatmulya", "unit": "UPTD Pengendalian Penduduk Kramatmulya", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 35, "nip": "19830213 200901 1 001", "nama": "NANAN HERDIAMAN, S.IP.", "golru": "III/d", "jabatan": "Kepala UPTD Pengendalian Penduduk Ciniru", "unit": "UPTD Pengendalian Penduduk Ciniru", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 36, "nip": "19721204 200003 1 004", "nama": "RADIMAN, S.IP.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Cilimus - UPTD Pengendalian Penduduk Cilimus", "kp_terakhir": "2024-03-01", "kp_berikutnya": "2028-03-01" },
+            { "no": 37, "nip": "19851205 201001 2 001", "nama": "TATI HERNAWATI, S.IP.", "golru": "III/d", "jabatan": "Kepala Sub Bagian Tata Usaha", "unit": "Subag TU UPTD Pengendalian Penduduk Kadugede - UPTD Pengendalian Penduduk Kadugede", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 38, "nip": "19690228 199503 1 001", "nama": "Drs. WAWAN IKHWANUDIN", "golru": "IV/a", "jabatan": "Perencana Ahli Muda", "unit": "Sekretariat", "kp_terakhir": "2025-03-01", "kp_berikutnya": "2029-03-01" },
+            { "no": 39, "nip": "19700706 200501 1 011", "nama": "UDI RUDI, S.Pd.,MM.", "golru": "IV/a", "jabatan": "Penelaah Teknis Kebijakan", "unit": "Bidang Keluarga Berencana", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 40, "nip": "19810216 200501 2 011", "nama": "GINA MERANI SARIFIANTI, S.Sos.", "golru": "III/d", "jabatan": "Analis Kebijakan Ahli Muda", "unit": "Bidang Pemberdayaan Perempuan dan Perlindungan Anak", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 41, "nip": "19700101 200701 2 030", "nama": "KUSTINI, SE., MM.", "golru": "III/d", "jabatan": "Analis Keuangan Pusat dan Daerah Ahli Muda", "unit": "Sekretariat", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 42, "nip": "19710720 200604 1 008", "nama": "H. RAHMAN, S.Sos.", "golru": "III/d", "jabatan": "Pengolah Data dan Informasi", "unit": "Sekretariat", "kp_terakhir": "2026-04-01", "kp_berikutnya": "2030-04-01" },
+            { "no": 43, "nip": "19810715 200901 2 008", "nama": "LINA HERLINA, SE.", "golru": "III/d", "jabatan": "Penelaah Teknis Kebijakan", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2025-01-01", "kp_berikutnya": "2029-01-01" },
+            { "no": 44, "nip": "19710515 200701 2 013", "nama": "ENOK SUNDARSIH, SE.", "golru": "III/c", "jabatan": "Penelaah Teknis Kebijakan", "unit": "Sekretariat", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 45, "nip": "19770920 201001 2 003", "nama": "IDA SUCIATI, S.IP.", "golru": "III/b", "jabatan": "Penelaah Teknis Kebijakan", "unit": "Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 46, "nip": "19750128 200701 1 001", "nama": "UCI SANUSI, S.IP.", "golru": "III/b", "jabatan": "Penelaah Teknis Kebijakan", "unit": "Bidang Keluarga Berencana", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 47, "nip": "19920524 202203 2 007", "nama": "AYU SEKARDINI, S.KM.", "golru": "III/b", "jabatan": "Penelaah Teknis Kebijakan", "unit": "Dinas Pengendalian Penduduk, Keluarga Berencana, Pemberdayaan Perempuan dan Perlindungan Anak", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 48, "nip": "19941116 202521 2 005", "nama": "TIA NURWULAN, S.E.", "golru": "IX", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 49, "nip": "19790507 201001 1 003", "nama": "DEDE ALIMUDINSYAH, S.IP.", "golru": "III/a", "jabatan": "Pengolah Data dan Informasi", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 50, "nip": "19810427 200701 2 006", "nama": "YANI SUPRIYANI", "golru": "III/a", "jabatan": "Pengadministrasi Perkantoran", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2023-01-01", "kp_berikutnya": "2027-01-01" },
+            { "no": 51, "nip": "19881005 202321 1 029", "nama": "KOMARUDIN, SE.", "golru": "IX", "jabatan": "Ahli Pertama - Perencana", "unit": "Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 52, "nip": "19730109 201409 1 001", "nama": "TOTO SUGIANTO, S.IP.", "golru": "III/a", "jabatan": "Pengadministrasi Perkantoran", "unit": "Sekretariat", "kp_terakhir": "2026-09-01", "kp_berikutnya": "2030-09-01" },
+            { "no": 53, "nip": "19710713 200801 2 002", "nama": "AENI NURAENI", "golru": "II/d", "jabatan": "Pengadministrasi Perkantoran", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2024-01-01", "kp_berikutnya": "2028-01-01" },
+            { "no": 54, "nip": "19691127 200906 1 003", "nama": "HERY HERYANTO", "golru": "II/d", "jabatan": "Pranata Komputer Terampil", "unit": "Sekretariat", "kp_terakhir": "2025-06-01", "kp_berikutnya": "2029-06-01" },
+            { "no": 55, "nip": "19921028 202521 1 011", "nama": "INDRA HARTONO", "golru": "V", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 56, "nip": "19810503 202521 2 004", "nama": "MELY MELIAWATI", "golru": "V", "jabatan": "Pengadministrasi Perkantoran", "unit": "Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 57, "nip": "19910915 202521 1 095", "nama": "SULAEMAN", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Ciawigebang", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 58, "nip": "19870606 202521 1 132", "nama": "SARYOMAN", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Subang", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 59, "nip": "19940720 202521 1 078", "nama": "DANI KURNIAWAN", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 60, "nip": "19930228 202521 1 087", "nama": "INDRA CAHYA, S.Pd..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Cibingbin", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 61, "nip": "19950217 202521 2 066", "nama": "SISKA ANJAR LESTARY, S.KM.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 62, "nip": "19941014 202521 1 051", "nama": "OBY RIZKI BASKARA, S.E.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Lebakwangi", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 63, "nip": "19970307 202521 2 076", "nama": "DIANA SRI WAHYUNI, S.Ak.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Lebakwangi", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 64, "nip": "19970506 202521 2 057", "nama": "NISA NADILA FAJARINI, S.H..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 65, "nip": "19740707 202521 2 039", "nama": "SAPTINAH, S.Pd..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Subang", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 66, "nip": "19820507 202521 2 051", "nama": "INDAH WULANSARI PURNAMANINGRUM, S.Pd.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 67, "nip": "19820917 202521 2 042", "nama": "FENY SUKMA ASIH, S.P..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 68, "nip": "19851219 202521 1 060", "nama": "DICKA FAHRUL ILMI", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 69, "nip": "19921016 202521 1 076", "nama": "GIAN NURADITIYA, S.Pd.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Luragung", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 70, "nip": "19960404 202521 1 073", "nama": "DEDE SOPIYAN, SE..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 71, "nip": "19931217 202521 1 080", "nama": "RENANDRA ADLICA JUHITMAH, S.P..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Mandirancan", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 72, "nip": "19900523 202521 1 079", "nama": "TETEN NUGRAHA", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 73, "nip": "19940209 202521 1 064", "nama": "MOCHAMAD RIDZAL FEBRYANA", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 74, "nip": "19930930 202521 2 084", "nama": "IRMA SRIYANI, S.KM.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 75, "nip": "19830215 202521 2 056", "nama": "HELLI SUSANTI, S.I.Kom.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Garawangi", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 76, "nip": "19930816 202521 1 087", "nama": "AGUS SUSANTO", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 77, "nip": "19860320 202521 2 049", "nama": "MELA AMELIAWATI, S. Pd.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 78, "nip": "19881222 202521 2 059", "nama": "DESI INDRIANI", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Cidahu", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 79, "nip": "19900328 202521 1 066", "nama": "TAUFIK RACHMANDANI, S.AP.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 80, "nip": "19951128 202521 2 073", "nama": "RIZTNYA PAQUEENA ANANDYA, S.H..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 81, "nip": "19950415 202521 2 110", "nama": "TIKA APRILIYANI, S.Pd.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Mandirancan", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 82, "nip": "19820726 202521 2 033", "nama": "YANTHI YULIANTHI", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Jalaksana", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 83, "nip": "19860825 202521 1 066", "nama": "DIDIN ROSIDIN, S.IP..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Mandirancan", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 84, "nip": "19910304 202521 1 095", "nama": "ANGGI TRIANSYAH, S.E..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 85, "nip": "19870601 202521 1 096", "nama": "YAN ROBIANSYAH", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 86, "nip": "19850414 202521 1 095", "nama": "ARIS SUHERMAN", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 87, "nip": "19900918 202521 1 065", "nama": "RICKY MAHARDIKA, S.E.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 88, "nip": "19850113 202521 2 040", "nama": "E. SITI NURLAELA", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Ciawigebang", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 89, "nip": "19870812 202521 1 136", "nama": "DWIKA BANON, S.Pd..", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "Sub Bagian Umum dan Kepegawaian - Sekretariat", "kp_terakhir": "2026-01-01", "kp_berikutnya": "2030-01-01" },
+            { "no": 90, "nip": "19930811 202521 1 077", "nama": "TITO RAHAYU BACHTIAR, S.Kom.", "golru": "NON", "jabatan": "Penata Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Subang", "kp_terakhir": "2026-02-01", "kp_berikutnya": "2030-02-01" },
+            { "no": 91, "nip": "19891226 202521 1 068", "nama": "EKA GULIT TANGGUNG SUTARNO", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Luragung", "kp_terakhir": "2026-02-01", "kp_berikutnya": "2030-02-01" },
+            { "no": 92, "nip": "20020919 202521 1 008", "nama": "RIZKI ALY SANTOSA", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Subang", "kp_terakhir": "2026-02-01", "kp_berikutnya": "2030-02-01" },
+            { "no": 93, "nip": "19870511 202521 1 088", "nama": "INDRA SURYA MANGGALA", "golru": "NON", "jabatan": "Operator Layanan Operasional", "unit": "UPTD Pengendalian Penduduk Subang", "kp_terakhir": "2026-02-01", "kp_berikutnya": "2030-02-01" }
+        ];
+
+        // Format Tanggal ke Bahasa Indonesia
+        function formatDate(dateStr) {
+            if (!dateStr || dateStr === 'None' || dateStr === 'nan') return '-';
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            return `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        }
+
+        // Hitung Status KP berdasarkan Tahun Saat Ini
+        function getKPStatus(kpBerikutnya) {
+            const currentYear = new Date().getFullYear();
+            const kpYear = new Date(kpBerikutnya).getFullYear();
+
+            if (isNaN(kpYear)) {
+                return { text: 'Belum Ada Data', bg: 'bg-gray-100', textCol: 'text-gray-600', type: 'unknown' };
+            }
+
+            if (kpYear < currentYear) {
+                return { text: 'Perlu Ditindaklanjuti', bg: 'bg-red-100', textCol: 'text-red-700', type: 'overdue' };
+            } else if (kpYear === currentYear) {
+                return { text: 'Segera Diusulkan', bg: 'bg-amber-100', textCol: 'text-amber-800', type: 'thisYear' };
+            } else {
+                return { text: 'Belum Waktunya', bg: 'bg-blue-100', textCol: 'text-blue-700', type: 'upcoming' };
+            }
+        }
+
+        // Render Tabel
+        function renderTable(data) {
+            const tbody = document.getElementById('kpTableBody');
+            tbody.innerHTML = '';
+
+            let countOverdue = 0;
+            let countThisYear = 0;
+            let countUpcoming = 0;
+
+            // Hitung statistik seluruh data asal
+            dataKP.forEach(item => {
+                const status = getKPStatus(item.kp_berikutnya);
+                if (status.type === 'overdue') countOverdue++;
+                if (status.type === 'thisYear') countThisYear++;
+                if (status.type === 'upcoming') countUpcoming++;
+            });
+
+            // Update Statistik Dashboard
+            document.getElementById('statOverdue').textContent = countOverdue;
+            document.getElementById('statThisYear').textContent = countThisYear;
+            document.getElementById('statUpcoming').textContent = countUpcoming;
+            document.getElementById('kpCount').textContent = data.length;
+
+            if (data.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="py-8 text-center text-gray-500 font-medium">
+                            Data pegawai tidak ditemukan.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            data.forEach((item, index) => {
+                const status = getKPStatus(item.kp_berikutnya);
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-gray-100';
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 text-center font-medium text-gray-500">${index + 1}</td>
+                    <td class="py-3.5 px-4">
+                        <p class="font-bold text-gray-900">${item.nama}</p>
+                        <p class="text-xs text-gray-500">NIP. ${item.nip}</p>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-semibold text-gray-700">${item.golru}</td>
+                    <td class="py-3.5 px-4">
+                        <p class="font-medium text-gray-800">${item.jabatan}</p>
+                        <p class="text-xs text-gray-500">${item.unit}</p>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-medium text-gray-600">${formatDate(item.kp_terakhir)}</td>
+                    <td class="py-3.5 px-4 text-center font-bold text-slate-800">${formatDate(item.kp_berikutnya)}</td>
+                    <td class="py-3.5 px-4 text-center">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${status.bg} ${status.textCol}">
+                            ${status.text}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Fitur Pencarian / Search Filter
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = dataKP.filter(item => {
+                return item.nama.toLowerCase().includes(searchTerm) ||
+                       item.nip.toLowerCase().includes(searchTerm) ||
+                       item.golru.toLowerCase().includes(searchTerm) ||
+                       item.jabatan.toLowerCase().includes(searchTerm) ||
+                       item.unit.toLowerCase().includes(searchTerm);
+            });
+            renderTable(filtered);
+        });
+
+        // Initial Render
+        renderTable(dataKP);
+    </script>
+</body>
+</html>

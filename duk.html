@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Urut Kepangkatan (DUK) - SIGAP DPPKBP3A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col justify-between">
+            <div>
+                <!-- Brand -->
+                <div class="h-16 flex items-center px-6 bg-slate-950 text-white font-bold text-lg gap-3">
+                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+                    <span>SIGAP DPPKBP3A</span>
+                </div>
+                <!-- Nav Links -->
+                <nav class="p-4 space-y-1 text-sm">
+                    <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-chart-pie w-5"></i> Dashboard
+                    </a>
+                    <a href="datapegawai.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-users-gear w-5"></i> Data Pegawai
+                    </a>
+                    <a href="duk.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-medium">
+                        <i class="fa-solid fa-id-card w-5"></i> DUK
+                    </a>
+                    <a href="kenaikan-pangkat.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-arrow-up-right-dots w-5"></i> Kenaikan Pangkat
+                    </a>
+                    <a href="penghargaan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-award w-5"></i> Penghargaan
+                    </a>
+                    <a href="pensiun.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-user-xmark w-5"></i> Pensiun
+                    </a>
+                    <a href="laporan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-file-lines w-5"></i> Laporan
+                    </a>
+                </nav>
+            </div>
+            <!-- Settings & Logout -->
+            <div class="p-4 border-t border-slate-800 space-y-1">
+                <a href="pengaturan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-gear w-5"></i> Pengaturan
+                </a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-right-from-bracket w-5"></i> Keluar
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- Top Navbar -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10">
+                <div class="flex items-center gap-4">
+                    <span class="font-semibold text-gray-700">Daftar Urut Kepangkatan (DUK) PNS TAHUN 2026</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800">Admin DPPKBP3A</p>
+                        <p class="text-xs text-gray-500">NIP. 19850101XXXXXXXXXX</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                        A
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content DUK -->
+            <main class="p-6">
+                <!-- Header Actions -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Daftar Urut Kepangkatan Pegawai</h2>
+                        <p class="text-sm text-gray-500">Urutan hierarki PNS DPPKBP3A berdasarkan Golongan/Pangkat, Jabatan, Masa Kerja, dan Pendidikan.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="window.print()" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg font-medium text-sm hover:bg-gray-50 shadow-sm flex items-center gap-2 transition">
+                            <i class="fa-solid fa-print text-blue-600"></i> Cetak DUK
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Highlight Stat Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Total Pegawai DUK</p>
+                        <h3 class="text-2xl font-bold text-slate-800 mt-1" id="statTotal">93</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-xs text-blue-600 font-semibold uppercase tracking-wider">Golongan IV</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mt-1" id="statGol4">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-xs text-emerald-600 font-semibold uppercase tracking-wider">Golongan III</p>
+                        <h3 class="text-2xl font-bold text-emerald-700 mt-1" id="statGol3">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-xs text-amber-600 font-semibold uppercase tracking-wider">Golongan II & I</p>
+                        <h3 class="text-2xl font-bold text-amber-700 mt-1" id="statGol2">0</h3>
+                    </div>
+                </div>
+
+                <!-- Filter & Search Bar -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                        <div class="relative w-full md:w-80">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="text" id="searchInput" placeholder="Cari Nama, NIP, atau Jabatan..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <select id="golonganFilter" class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="all">Semua Golongan</option>
+                            <option value="IV">Golongan IV</option>
+                            <option value="III">Golongan III</option>
+                            <option value="II">Golongan II</option>
+                            <option value="I">Golongan I</option>
+                        </select>
+                    </div>
+                    <div class="text-xs text-gray-500 font-medium w-full md:w-auto text-right">
+                        Menampilkan <strong id="dataCount" class="text-gray-800">0</strong> Pegawai
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 text-white text-xs uppercase font-semibold">
+                                    <th class="py-3.5 px-4 text-center">No DUK</th>
+                                    <th class="py-3.5 px-4">Nama Lengkap & NIP</th>
+                                    <th class="py-3.5 px-4 text-center">Pangkat / Gol. Ruang</th>
+                                    <th class="py-3.5 px-4 text-center">TMT Pangkat</th>
+                                    <th class="py-3.5 px-4">Jabatan</th>
+                                    <th class="py-3.5 px-4 text-center">Masa Kerja</th>
+                                    <th class="py-3.5 px-4 text-center">Pendidikan / Tingkat</th>
+                                    <th class="py-3.5 px-4 text-center">Usia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dukTableBody" class="divide-y divide-gray-200 text-sm text-gray-700">
+                                <!-- Data dirender via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Data DUK diambil dari file DUK DPPKBP3A.xlsx
+        const dataDUK = [
+            { no: 1, nip: "19700810 199002 1 001", nama: "H. APIP ROPI'I, Ners, S.Sos, S.KM, MMKes.", pangkat: "Pembina Tk.I", gol: "IV/b", tmt_pangkat: "2026-03-01", jabatan: "Kepala Dinas", mk: "36,06 th", pendidikan: "Magister Kesehatan", tk_ijazah: "S.2", usia: "56" },
+            { no: 2, nip: "19720301 200604 1 011", nama: "dr. EDDY SYARIEF, MM., MM.RS.", pangkat: "Pembina Tk.I", gol: "IV/b", tmt_pangkat: "2024-02-01", jabatan: "Sekretaris Dinas", mk: "20,04 Th", pendidikan: "Magister Manajemen Sumber Daya Manusia", tk_ijazah: "S.2", usia: "54" },
+            { no: 3, nip: "19791029 200501 1 003", nama: "ANWAR NASIHIN, S.Kom., M.Si.", pangkat: "Pembina", gol: "IV/a", tmt_pangkat: "2022-04-01", jabatan: "Kepala Bidang Keluarga Sejahtera", mk: "21,07 Th", pendidikan: "Magister Administrasi Publik", tk_ijazah: "S.2", usia: "46" },
+            { no: 4, nip: "19810602 200801 1 006", nama: "ANTON SUPRAPTO, S.Kep.Ners. ,M.K.M.", pangkat: "Pembina", gol: "IV/a", tmt_pangkat: "2024-04-01", jabatan: "Kepala Bidang Pengendalian Penduduk", mk: "18,07 Th", pendidikan: "Magister Kesehatan Masyarakat", tk_ijazah: "S.2", usia: "45" },
+            { no: 5, nip: "19741110 200801 1 018", nama: "H. NOVI PRIHAWAN, A.KS.", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2020-04-01", jabatan: "Kepala Bidang Keluarga Berencana", mk: "18,07 Th", pendidikan: "Pekerjaan Sosial", tk_ijazah: "Pekerjaan sosial", usia: "51" },
+            { no: 6, nip: "19760504 199901 2 001", nama: "IJAH HODIJAH, SE.", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2023-04-01", jabatan: "Kepala Bidang Pemberdayaan Perempuan dan Perlindungan Anak", mk: "27,07 Th", pendidikan: "Akuntansi", tk_ijazah: "S.1", usia: "50" },
+            { no: 7, nip: "19680516 199303 1 008", nama: "Drs. NANANG JUHANA", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2024-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Muda", mk: "33,05 th", pendidikan: "Pendidikan Agama Islam", tk_ijazah: "S.1", usia: "58" },
+            { no: 8, nip: "19690105 199003 1 006", nama: "KOMARUDIN, SKM., MMKes.", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2024-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Muda", mk: "36,05 th", pendidikan: "Magister Kesehatan", tk_ijazah: "S.2", usia: "57" },
+            { no: 9, nip: "19830504 200902 2 003", nama: "EUIS KOMARIAH, S.Pd., M.M.", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2024-04-01", jabatan: "Analis Kebijakan Ahli Muda / Ketu Tim Kerjasama dan Hubungan Antar Lembaga", mk: "17,06 Th", pendidikan: "Magister Manajemen", tk_ijazah: "S.2", usia: "43" },
+            { no: 10, nip: "19700305 199003 1 002", nama: "YAYAT SUDRAJAT, S.Pd.", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2024-10-01", jabatan: "Penggerak Swadaya Masyarakat Ahli Muda", mk: "36,05 th", pendidikan: "Pendidikan Olahraga", tk_ijazah: "S.1", usia: "56" },
+            { no: 11, nip: "19810309 200604 2 018", nama: "INDRIASARI, S.Kep., Ners.", pangkat: "Penata Tk.I", gol: "III/d", tmt_pangkat: "2024-10-01", jabatan: "Analis Kebijakan Ahli Muda", mk: "20,04 Th", pendidikan: "S-1 Profesi Keperawatan", tk_ijazah: "S.1", usia: "45" },
+            { no: 12, nip: "19800612 200801 1 008", nama: "DIDIN AWALUDIN, S.Pd..", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2020-04-01", jabatan: "Analis Kebijakan Ahli Muda / Ketua Tim Advokasi dan KIE", mk: "18,07 Th", pendidikan: "Pendidikan Sejarah", tk_ijazah: "S.1", usia: "46" },
+            { no: 13, nip: "19821102 200801 2 006", nama: "DINI NOVIANTI RATNA JUWITA, SE.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2020-04-01", jabatan: "Kasubag Keuangan dan Program", mk: "18,07 Th", pendidikan: "Ekonomi Manajemen", tk_ijazah: "S.1", usia: "43" },
+            { no: 14, nip: "19830827 200801 2 005", nama: "SITI NURJANAH, SE.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2020-04-01", jabatan: "Kepala Sub Bagian Umum dan Kepegawaian", mk: "18,07 Th", pendidikan: "Manajemen", tk_ijazah: "S.1", usia: "43" },
+            { no: 15, nip: "19770512 201001 1 008", nama: "SAID, SH.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Muda/Ketua Tim Ketahanan dan Kesejahteraan Keluarga", mk: "16,07 Th", pendidikan: "Hukum Perdata", tk_ijazah: "S.1", usia: "49" },
+            { no: 16, nip: "19880112 201403 2 002", nama: "dr. ADHIANI KOESMAN", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2022-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Muda", mk: "12,05 th", pendidikan: "Kedokteran", tk_ijazah: "S.1", usia: "38" },
+            { no: 17, nip: "19800720 200801 1 009", nama: "ERO JUHARA, S.AP.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2023-04-01", jabatan: "Analis Kebijakan Ahli Muda / Ketua Tim Pemenuhan Hak Anak", mk: "18,07 Th", pendidikan: "Administrasi Publik", tk_ijazah: "S.1", usia: "46" },
+            { no: 18, nip: "19801002 200501 1 008", nama: "DENI WAHYUDI PRIADI, SKM., M.A.P..", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2024-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Muda", mk: "21,07 Th", pendidikan: "Magister Administrasi Publik", tk_ijazah: "S.2", usia: "45" },
+            { no: 19, nip: "19780512 201001 2 006", nama: "YOYOM SITI MARIAM, S.IP.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2024-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Muda", mk: "16,07 Th", pendidikan: "Pemerintahan", tk_ijazah: "S.1", usia: "48" },
+            { no: 20, nip: "19811107 200604 2 021", nama: "NOPA PUJIHASTUTI, SE., M.A.P.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2024-04-01", jabatan: "Analis Kebijakan Ahli Muda", mk: "20,04 Th", pendidikan: "Magister Administrasi Publik", tk_ijazah: "S.2", usia: "44" },
+            { no: 21, nip: "19800812 200801 2 006", nama: "ETI SUARTI, SE., M.Si.", pangkat: "Penata", gol: "III/c", tmt_pangkat: "2024-10-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Muda", mk: "18,07 Th", pendidikan: "Magister Sains/Ilmu Ekonomi", tk_ijazah: "S.2", usia: "46" },
+            { no: 22, nip: "19690326 199503 2 001", nama: "Dra. NARUL HAYATI", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2010-10-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "31,05 th", pendidikan: "Sastra Arab", tk_ijazah: "S.1", usia: "57" },
+            { no: 23, nip: "19721010 200003 2 005", nama: "NUNUNG NURZAENAH, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2015-10-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "26,05 th", pendidikan: "Ekonomi Manajemen", tk_ijazah: "S.1", usia: "53" },
+            { no: 24, nip: "19800827 200801 1 005", nama: "DIKDIK MEDIAGUSDIANA, SE..", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2017-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "18,07 Th", pendidikan: "Manajemen S-1", tk_ijazah: "S.1", usia: "46" },
+            { no: 25, nip: "19800615 200902 2 002", nama: "SRI YATI, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2018-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "17,06 Th", pendidikan: "Manajemen", tk_ijazah: "S.1", usia: "46" },
+            { no: 26, nip: "19830425 201101 1 001", nama: "HENDRA SUHENDRA, S.Sos.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2019-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "15,07 Th", pendidikan: "Ilmu Sosial", tk_ijazah: "S.1", usia: "43" },
+            { no: 27, nip: "19770515 200801 1 008", nama: "JAJANG JARKASIH, S.AP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "18,07 Th", pendidikan: "Administrasi Publik", tk_ijazah: "S.1", usia: "49" },
+            { no: 28, nip: "19780510 200801 2 015", nama: "EUIS NURMALA, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "18,07 Th", pendidikan: "Ekonomi Studi Pembangunan", tk_ijazah: "S.1", usia: "48" },
+            { no: 29, nip: "19790403 200701 1 009", nama: "UDIN MAHRUDIN, S.Sos.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "19,07 Th", pendidikan: "Sosiatri", tk_ijazah: "S.1", usia: "47" },
+            { no: 30, nip: "19800410 200902 2 003", nama: "NINA NURAFNI, S.Pd.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "17,06 Th", pendidikan: "Pendidikan Bahasa Indonesia", tk_ijazah: "S.1", usia: "46" },
+            { no: 31, nip: "19800720 200902 2 002", nama: "ELIS KARMANAH, S.Pd.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "17,06 Th", pendidikan: "Pendidikan Sejarah", tk_ijazah: "S.1", usia: "46" },
+            { no: 32, nip: "19810612 200701 2 008", nama: "YENI MULYATI, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "19,07 Th", pendidikan: "Ekonomi Studi Pembangunan", tk_ijazah: "S.1", usia: "45" },
+            { no: 33, nip: "19810825 201001 1 009", nama: "MAS`UD, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "16,07 Th", pendidikan: "Ekonomi Manajemen", tk_ijazah: "S.1", usia: "45" },
+            { no: 34, nip: "19820516 200701 1 007", nama: "MAMAN SULAEMAN, S.IP., M.A.P..", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "19,07 Th", pendidikan: "Magister Administrasi Publik", tk_ijazah: "S.2", usia: "44" },
+            { no: 35, nip: "19830504 200902 1 002", nama: "NANAN HERDIAMAN, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2020-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "17,06 Th", pendidikan: "Pemerintahan", tk_ijazah: "S.1", usia: "43" },
+            { no: 36, nip: "19720302 200003 1 003", nama: "RADIMAN, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2021-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "26,05 th", pendidikan: "Ilmu Politik", tk_ijazah: "S.1", usia: "54" },
+            { no: 37, nip: "19800720 201001 2 006", nama: "TATI HERNAWATI, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2021-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "16,07 Th", pendidikan: "Ilmu Pemerintahan", tk_ijazah: "S.1", usia: "46" },
+            { no: 38, nip: "19660103 199503 1 003", nama: "Drs. WAWAN IKHWANUDIN", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2021-10-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "31,05 th", pendidikan: "Pendidikan Agama Islam", tk_ijazah: "S.1", usia: "60" },
+            { no: 39, nip: "19790623 200501 1 007", nama: "UDI RUDI, S.Pd.,MM.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "21,07 Th", pendidikan: "Magister Manajemen", tk_ijazah: "S.2", usia: "47" },
+            { no: 40, nip: "19800227 200501 2 010", nama: "GINA MERANI SARIFIANTI, S.Sos.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "21,07 Th", pendidikan: "Sosiologi", tk_ijazah: "S.1", usia: "46" },
+            { no: 41, nip: "19730303 200701 2 012", nama: "KUSTINI, SE., MM.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "-", pendidikan: "Magister Manajemen", tk_ijazah: "S.2", usia: "53" },
+            { no: 42, nip: "19750518 200604 1 013", nama: "H. RAHMAN, S.Sos.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "20,04 Th", pendidikan: "Administrasi Negara", tk_ijazah: "S.1", usia: "51" },
+            { no: 43, nip: "19790104 200902 2 001", nama: "LINA HERLINA, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "17,06 Th", pendidikan: "Manajemen", tk_ijazah: "S.1", usia: "47" },
+            { no: 44, nip: "19800109 200701 2 006", nama: "ENOK SUNDARSIH, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "19,07 Th", pendidikan: "Manajemen", tk_ijazah: "S.1", usia: "46" },
+            { no: 45, nip: "19820502 201001 2 008", nama: "IDA SUCIATI, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "16,07 Th", pendidikan: "Ilmu Pemerintahan", tk_ijazah: "S.1", usia: "44" },
+            { no: 46, nip: "19821008 200701 1 005", nama: "UCI SANUSI, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "19,07 Th", pendidikan: "Ilmu Pemerintahan", tk_ijazah: "S.1", usia: "43" },
+            { no: 47, nip: "19970923 202203 2 006", nama: "AYU SEKARDINI, S.KM.", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2022-03-01", jabatan: "Administrator Kesehatan Ahli Pertama", mk: "04,05 th", pendidikan: "S-1 KESEHATAN MASYARAKAT", tk_ijazah: "S.1", usia: "28" },
+            { no: 48, nip: "19851122 201001 2 021", nama: "TIA NURWULAN, S.E.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2022-10-01", jabatan: "Analis Kerjasama", mk: "-", pendidikan: "Ekonomi Manajemen", tk_ijazah: "S.1", usia: "40" },
+            { no: 49, nip: "19810708 201001 1 018", nama: "DEDE ALIMUDINSYAH, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2023-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "16,07 Th", pendidikan: "Ilmu Pemerintahan", tk_ijazah: "S.1", usia: "45" },
+            { no: 50, nip: "19810803 200701 2 008", nama: "YANI SUPRIYANI", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2023-04-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "19,07 Th", pendidikan: "S-1 Sarjana Ekonomi", tk_ijazah: "S.1", usia: "45" },
+            { no: 51, nip: "19830822 201001 1 013", nama: "KOMARUDIN, SE.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2023-10-01", jabatan: "Pengelola Pemberdayaan Perempuan dan Perlindungan Anak", mk: "-", pendidikan: "Manajemen", tk_ijazah: "S.1", usia: "43" },
+            { no: 52, nip: "19860324 201403 1 002", nama: "TOTO SUGIANTO, S.IP.", pangkat: "Penata Muda Tk.I", gol: "III/b", tmt_pangkat: "2024-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "12,05 th", pendidikan: "Pemerintahan", tk_ijazah: "S.1", usia: "40" },
+            { no: 53, nip: "19800720 200801 2 016", nama: "AENI NURAENI", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2008-01-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "18,07 Th", pendidikan: "S-1 Sarjana Pendidikan Agama Islam", tk_ijazah: "S.1", usia: "46" },
+            { no: 54, nip: "19801005 200901 1 008", nama: "HERY HERYANTO", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2018-04-01", jabatan: "Pengolah Data Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "D-3 Manajemen Informatika", tk_ijazah: "D.3", usia: "45" },
+            { no: 55, nip: "19840226 201001 1 009", nama: "INDRA HARTONO", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2018-04-01", jabatan: "Analis Perlindungan Perempuan", mk: "-", pendidikan: "STKIP Sarjana Pendidkan Bahasa Inggris", tk_ijazah: "S.1", usia: "42" },
+            { no: 56, nip: "19850529 201001 2 021", nama: "MELY MELIAWATI", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2018-04-01", jabatan: "Pengadministrasi Sarana dan Prasarana", mk: "-", pendidikan: "SLTA", tk_ijazah: "SLTA", usia: "41" },
+            { no: 57, nip: "19780806 200901 1 008", nama: "SULAEMAN", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2019-04-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "Sekolah Tinggi Ilmu Ekonomi Ilmu Keuangan dan Perbankan", tk_ijazah: "S.1", usia: "48" },
+            { no: 58, nip: "19790615 200901 1 008", nama: "SARYOMAN", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2019-04-01", jabatan: "Penggerak Swadaya Masyarakat Ahli Pertama", mk: "-", pendidikan: "Sekolah Tinggi Ilmu Ekonomi Manajemen", tk_ijazah: "S.1", usia: "47" },
+            { no: 59, nip: "19850604 201001 1 024", nama: "DANI KURNIAWAN", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2020-04-01", jabatan: "Pengelola Pemberdayaan Perempuan dan Perlindungan Anak", mk: "-", pendidikan: "S-1 Manajemen", tk_ijazah: "S.1", usia: "41" },
+            { no: 60, nip: "19820524 201403 1 001", nama: "INDRA CAHYA, S.Pd..", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2022-04-01", jabatan: "Penggerak Swadaya Masyarakat Ahli Pertama", mk: "-", pendidikan: "S-1 Pendidikan Bahasa Dan Sastra Indonesia", tk_ijazah: "S.1", usia: "44" },
+            { no: 61, nip: "19980512 202408 2 002", nama: "SISKA ANJAR LESTARY, S.KM.", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "-", pendidikan: "S-1 Kesehatan Masyarakat", tk_ijazah: "S.1", usia: "28" },
+            { no: 62, nip: "19940306 202408 1 002", nama: "OBY RIZKI BASKARA, S.E.", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Ekonomi Pembangunan", tk_ijazah: "S.1", usia: "32" },
+            { no: 63, nip: "19961028 202408 2 001", nama: "DIANA SRI WAHYUNI, S.Ak.", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Akuntansi", tk_ijazah: "S.1", usia: "29" },
+            { no: 64, nip: "19980205 202408 2 001", nama: "NISA NADILA FAJARINI, S.H..", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "-", pendidikan: "S-1 Hukum", tk_ijazah: "S.1", usia: "28" },
+            { no: 65, nip: "19930922 202408 2 001", nama: "SAPTINAH, S.Pd..", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Pendidikan Bahasa Indonesia", tk_ijazah: "S.1", usia: "32" },
+            { no: 66, nip: "19960714 202408 2 002", nama: "INDAH WULANSARI PURNAMANINGRUM, S.Pd.", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Pendidikan Geografi", tk_ijazah: "S.1", usia: "30" },
+            { no: 67, nip: "19980208 202408 2 001", nama: "FENY SUKMA ASIH, S.P..", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Agroteknologi", tk_ijazah: "S.1", usia: "28" },
+            { no: 68, nip: "19970921 202408 1 001", nama: "DICKA FAHRUL ILMI", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Komunikasi dan Pengembangan Masyarakat", tk_ijazah: "S.1", usia: "28" },
+            { no: 69, nip: "19941103 202408 1 001", nama: "GIAN NURADITIYA, S.Pd.", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Ahli Pertama", mk: "-", pendidikan: "S-1 Pendidikan Biologi", tk_ijazah: "S.1", usia: "31" },
+            { no: 70, nip: "19830501 202408 1 001", nama: "DEDE SOPIYAN, SE..", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Analis Kebijakan Ahli Pertama", mk: "-", pendidikan: "S-1 Ekonomi Pembangunan", tk_ijazah: "S.1", usia: "43" },
+            { no: 71, nip: "19980616 202408 2 002", nama: "RENANDRA ADLICA JUHITMAH, S.P..", pangkat: "Penata Muda", gol: "III/a", tmt_pangkat: "2024-08-01", jabatan: "Penggerak Swadaya Masyarakat Ahli Pertama", mk: "-", pendidikan: "S-1 Agribisnis", tk_ijazah: "S.1", usia: "28" },
+            { no: 72, nip: "19830722 200701 1 005", nama: "TETEN NUGRAHA", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2016-04-01", jabatan: "Pengolah Data Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "SLTA Umum", tk_ijazah: "SLTA", usia: "43" },
+            { no: 73, nip: "19860203 200701 1 003", nama: "MOCHAMAD RIDZAL FEBRYANA", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2016-04-01", jabatan: "Analis Ketahanan Keluarga", mk: "-", pendidikan: "SMK Akuntansi", tk_ijazah: "SLTA", usia: "40" },
+            { no: 74, nip: "19861118 201001 2 008", nama: "IRMA SRIYANI, S.KM.", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2018-04-01", jabatan: "Analis Advokasi dan KIE", mk: "-", pendidikan: "S-1 Kesehatan Masyarakat", tk_ijazah: "S.1", usia: "39" },
+            { no: 75, nip: "19870710 201001 2 018", nama: "HELLI SUSANTI, S.I.Kom.", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2018-04-01", jabatan: "Analis Tata Usaha", mk: "-", pendidikan: "S-1 Ilmu Komunikasi", tk_ijazah: "S.1", usia: "39" },
+            { no: 76, nip: "19780816 200801 1 007", nama: "AGUS SUSANTO", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2019-04-01", jabatan: "Pengolah Data Advokasi KIE dan Bina Pertumbuhan Anak", mk: "-", pendidikan: "SMA IPA", tk_ijazah: "SLTA", usia: "48" },
+            { no: 77, nip: "19800511 200801 2 007", nama: "MELA AMELIAWATI, S. Pd.", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2019-04-01", jabatan: "Pranata Komputer Pelaksana / Keterampilan", mk: "-", pendidikan: "S-1 Pendidikan Bahasa Dan Sastra Indonesia", tk_ijazah: "S.1", usia: "46" },
+            { no: 78, nip: "19801211 200801 2 008", nama: "DESI INDRIANI", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2019-04-01", jabatan: "Pengolah Data Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "S-1 Manajemen", tk_ijazah: "S.1", usia: "45" },
+            { no: 79, nip: "19810427 200801 1 006", nama: "TAUFIK RACHMANDANI, S.AP.", pangkat: "Pengatur Tk.I", gol: "II/d", tmt_pangkat: "2019-04-01", jabatan: "Analis Data dan Informasi", mk: "-", pendidikan: "S-1 Administrasi Publik", tk_ijazah: "S.1", usia: "45" },
+            { no: 80, nip: "19940129 202408 2 001", nama: "RIZTNYA PAQUEENA ANANDYA, S.H..", pangkat: "Pengatur", gol: "II/c", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Terampil", mk: "-", pendidikan: "D-III Komunikasi Massa", tk_ijazah: "D.3", usia: "32" },
+            { no: 81, nip: "19910408 202408 2 001", nama: "TIKA APRILIYANI, S.Pd.", pangkat: "Pengatur", gol: "II/c", tmt_pangkat: "2024-08-01", jabatan: "Penata Kependudukan dan Keluarga Berencana Terampil", mk: "-", pendidikan: "D-III Kebidanan", tk_ijazah: "D.3", usia: "35" },
+            { no: 82, nip: "19830707 200701 2 008", nama: "YANTHI YULIANTHI", pangkat: "Pengatur", gol: "II/c", tmt_pangkat: "2012-04-01", jabatan: "Pengolah Data Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "S-1 Keperawatan", tk_ijazah: "S.1", usia: "43" },
+            { no: 83, nip: "19780614 200801 1 008", nama: "DIDIN ROSIDIN, S.IP..", pangkat: "Pengatur", gol: "II/c", tmt_pangkat: "2015-04-01", jabatan: "Pengolah Data Advokasi KIE dan Bina Pertumbuhan Anak", mk: "-", pendidikan: "S-1 Ilmu Pemerintahan", tk_ijazah: "S.1", usia: "48" },
+            { no: 84, nip: "19850614 200801 1 002", nama: "ANGGI TRIANSYAH, S.E..", pangkat: "Pengatur", gol: "II/c", tmt_pangkat: "2015-04-01", jabatan: "Pengelola Pembina Kemitraan", mk: "-", pendidikan: "S-1 Manajemen", tk_ijazah: "S.1", usia: "41" },
+            { no: 85, nip: "19780628 200701 1 007", nama: "YAN ROBIANSYAH", pangkat: "Pengatur Muda Tk.I", gol: "II/b", tmt_pangkat: "2015-04-01", jabatan: "Pengolah Data Advokasi KIE dan Bina Pertumbuhan Anak", mk: "-", pendidikan: "SMA A.3/IPS", tk_ijazah: "SLTA", usia: "48" },
+            { no: 86, nip: "19800609 200801 1 008", nama: "ARIS SUHERMAN", pangkat: "Pengatur Muda Tk.I", gol: "II/b", tmt_pangkat: "2016-04-01", jabatan: "Pengadministrasi Sarana dan Prasarana", mk: "-", pendidikan: "SMA", tk_ijazah: "SLTA", usia: "46" },
+            { no: 87, nip: "19860309 201001 1 012", nama: "RICKY MAHARDIKA, S.E.", pangkat: "Pengatur Muda Tk.I", gol: "II/b", tmt_pangkat: "2017-04-01", jabatan: "Pengadministrasi Kebutuhan Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "S-1 Ekonomi Pembangunan", tk_ijazah: "S.1", usia: "40" },
+            { no: 88, nip: "19720815 200701 2 009", nama: "E. SITI NURLAELA", pangkat: "Pengatur Muda", gol: "II/a", tmt_pangkat: "2007-01-01", jabatan: "Pengolah Data Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "S-1 Ekonomi", tk_ijazah: "S.1", usia: "54" },
+            { no: 89, nip: "19841029 200801 1 001", nama: "DWIKA BANON, S.Pd..", pangkat: "Pengatur Muda", gol: "II/a", tmt_pangkat: "2008-01-01", jabatan: "Analis Data dan Informasi", mk: "-", pendidikan: "S-1 Pendidikan Kewarganegaraan", tk_ijazah: "S.1", usia: "41" },
+            { no: 90, nip: "19850227 201001 1 014", nama: "TITO RAHAYU BACHTIAR, S.Kom.", pangkat: "Pengatur Muda", gol: "II/a", tmt_pangkat: "2010-01-01", jabatan: "Pranata Komputer Pelaksana / Keterampilan", mk: "-", pendidikan: "S-1 Teknik Informatika", tk_ijazah: "S.1", usia: "41" },
+            { no: 91, nip: "19780210 200801 1 008", nama: "EKA GULIT TANGGUNG SUTARNO", pangkat: "Juru Tk.I", gol: "I/d", tmt_pangkat: "2016-04-01", jabatan: "Pengadministrasi Sarana dan Prasarana", mk: "-", pendidikan: "SLTP/Sederajat", tk_ijazah: "SLTP", usia: "48" },
+            { no: 92, nip: "19800624 200801 1 008", nama: "RIZKI ALY SANTOSA", pangkat: "Juru Tk.I", gol: "I/d", tmt_pangkat: "2016-04-01", jabatan: "Pengadministrasi Sarana dan Prasarana", mk: "-", pendidikan: "SMK Pertanian", tk_ijazah: "SLTA", usia: "46" },
+            { no: 93, nip: "19820521 200801 1 007", nama: "INDRA SURYA MANGGALA", pangkat: "Juru Tk.I", gol: "I/d", tmt_pangkat: "2016-04-01", jabatan: "Pengolah Data Sarana dan Prasarana BP BKB", mk: "-", pendidikan: "SLTA Umum", tk_ijazah: "SLTA", usia: "44" }
+        ];
+
+        const dukTableBody = document.getElementById('dukTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const golonganFilter = document.getElementById('golonganFilter');
+        const dataCount = document.getElementById('dataCount');
+
+        function renderDUK(data) {
+            dukTableBody.innerHTML = '';
+            dataCount.textContent = data.length;
+
+            let countGol4 = 0;
+            let countGol3 = 0;
+            let countGol2 = 0;
+
+            if (data.length === 0) {
+                dukTableBody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-gray-400">Data DUK tidak ditemukan.</td></tr>`;
+                return;
+            }
+
+            data.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+
+                // Hitung Statistik
+                if (item.gol.startsWith('IV')) countGol4++;
+                else if (item.gol.startsWith('III')) countGol3++;
+                else countGol2++;
+
+                // Color Tag untuk Golongan
+                let golBadge = 'bg-gray-100 text-gray-700 border-gray-300';
+                if (item.gol.startsWith('IV')) golBadge = 'bg-blue-100 text-blue-800 border-blue-300';
+                else if (item.gol.startsWith('III')) golBadge = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+                else if (item.gol.startsWith('II')) golBadge = 'bg-amber-100 text-amber-800 border-amber-300';
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 text-center font-bold text-slate-800 text-xs">${item.no}</td>
+                    <td class="py-3.5 px-4">
+                        <div class="font-bold text-gray-900">${item.nama}</div>
+                        <div class="text-xs font-mono text-gray-500">NIP. ${item.nip}</div>
+                    </td>
+                    <td class="py-3.5 px-4 text-center">
+                        <div class="text-xs font-medium text-gray-700">${item.pangkat}</div>
+                        <span class="inline-block mt-1 text-xs px-2 py-0.5 rounded border font-mono font-bold ${golBadge}">
+                            ${item.gol}
+                        </span>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-mono text-xs text-gray-600">${item.tmt_pangkat}</td>
+                    <td class="py-3.5 px-4">
+                        <div class="text-xs font-semibold text-gray-800">${item.jabatan}</div>
+                        <div class="text-[11px] text-gray-400">${item.unit_kerja || 'DPPKBP3A'}</div>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-mono text-xs text-gray-700">${item.mk}</td>
+                    <td class="py-3.5 px-4 text-center">
+                        <div class="text-xs text-gray-800">${item.pendidikan}</div>
+                        <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-bold">${item.tk_ijazah}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-bold text-gray-700 text-xs">${item.usia} Th</td>
+                `;
+                dukTableBody.appendChild(tr);
+            });
+
+            // Update statistik
+            document.getElementById('statTotal').textContent = dataDUK.length;
+            document.getElementById('statGol4').textContent = countGol4;
+            document.getElementById('statGol3').textContent = countGol3;
+            document.getElementById('statGol2').textContent = countGol2;
+        }
+
+        // Combined Filter Function
+        function filterData() {
+            const searchVal = searchInput.value.toLowerCase();
+            const golVal = golonganFilter.value;
+
+            const filtered = dataDUK.filter(item => {
+                const matchSearch = item.nama.toLowerCase().includes(searchVal) || 
+                                    item.nip.toLowerCase().includes(searchVal) ||
+                                    item.jabatan.toLowerCase().includes(searchVal);
+                
+                let matchGol = true;
+                if (golVal !== 'all') {
+                    matchGol = item.gol.startsWith(golVal);
+                }
+
+                return matchSearch && matchGol;
+            });
+
+            renderDUK(filtered);
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterData);
+        golonganFilter.addEventListener('change', filterData);
+
+        // Inisialisasi awal saat load
+        document.addEventListener('DOMContentLoaded', () => renderDUK(dataDUK));
+    </script>
+</body>
+</html>

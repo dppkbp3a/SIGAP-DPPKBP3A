@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SIGAP DPPKBP3A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col justify-between">
+            <div>
+                <!-- Brand -->
+                <div class="h-16 flex items-center px-6 bg-slate-950 text-white font-bold text-lg gap-3">
+                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+                    <div class="flex flex-col">
+                        <span class="leading-tight">SIGAP DPPKBP3A</span>
+                        <span class="text-xs text-slate-400 font-normal">Kab.Kuningan</span>
+                    </div>
+                </div>
+                <!-- Nav Links -->
+                <nav class="p-4 space-y-1 text-sm">
+                    <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-medium">
+                        <i class="fa-solid fa-chart-pie w-5"></i> Dashboard
+                    </a>
+                    <a href="datapegawai.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-users-gear w-5"></i> Data Pegawai
+                    </a>
+                    <a href="duk.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-id-card w-5"></i> DUK
+                    </a>
+                    <a href="kenaikan-pangkat.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-arrow-up-right-dots w-5"></i> Kenaikan Pangkat
+                    </a>
+                    <a href="penghargaan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-award w-5"></i> Penghargaan
+                    </a>
+                    <a href="pensiun.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-user-xmark w-5"></i> Pensiun
+                    </a>
+                    <a href="laporan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-file-lines w-5"></i> Laporan
+                    </a>
+                </nav>
+            </div>
+            <!-- Settings & Logout -->
+            <div class="p-4 border-t border-slate-800 space-y-1">
+                <a href="pengaturan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-gear w-5"></i> Pengaturan
+                </a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-right-from-bracket w-5"></i> Keluar
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- Top Navbar -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10">
+                <div class="flex items-center gap-4">
+                    <span class="font-semibold text-gray-700">Monitoring Agenda & Kepegawaian</span>
+                    <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span>Update Otomatis Aktif</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800">Admin DPPKBP3A</p>
+                        <p class="text-xs text-gray-500">NIP. 19811110 200604 2 007</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                        A
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Dashboard -->
+            <main class="p-6">
+                <!-- Welcome Banner -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-white mb-6 shadow-md flex justify-between items-center">
+                    <div>
+                        <h2 class="text-xl font-bold mb-1">Selamat Datang di SIGAP, Admin!</h2>
+                        <p class="text-sm text-blue-100">Pantau dan kelola data pegawai serta agenda kedinasan DPPKBP3A dengan mudah.</p>
+                    </div>
+                    <button onclick="bukaModalAgenda()" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold text-sm shadow hover:bg-blue-50 transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Tambah Agenda
+                    </button>
+                </div>
+
+                <!-- Stat Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <a href="datapegawai.html" class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between hover:shadow-md hover:border-blue-400 transition cursor-pointer">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium uppercase">Total Pegawai</p>
+                            <h3 id="totalPegawaiCount" class="text-2xl font-bold text-gray-800 mt-1">93</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                    </a>
+
+                    <a href="kenaikan-pangkat.html" class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between hover:shadow-md hover:border-yellow-400 transition cursor-pointer">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium uppercase">Kenaikan Pangkat</p>
+                            <h3 id="kpCount" class="text-2xl font-bold text-yellow-600 mt-1">3</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-arrow-up-right-dots"></i>
+                        </div>
+                    </a>
+
+                    <a href="penghargaan.html" class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between hover:shadow-md hover:border-green-400 transition cursor-pointer">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium uppercase">Penghargaan</p>
+                            <h3 id="penghargaanCount" class="text-2xl font-bold text-green-600 mt-1">8</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-lg bg-green-50 text-green-600 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                    </a>
+
+                    <a href="pensiun.html" class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between hover:shadow-md hover:border-purple-400 transition cursor-pointer">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium uppercase">Pensiun</p>
+                            <h3 id="pensiunCount" class="text-2xl font-bold text-purple-600 mt-1">45</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-user-xmark"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Recent Table Section -->
+                <div id="section-tabel-agenda" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="p-5 border-b border-gray-200 flex justify-between items-center">
+                        <h3 class="font-bold text-gray-800 text-base">Agenda Kedinasan Terbaru</h3>
+                        <a href="agenda.html" onclick="lihatSemuaAgenda(event)" class="text-sm text-blue-600 font-medium hover:underline flex items-center gap-1">
+                            Lihat Semua <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 text-gray-600 text-xs uppercase font-semibold">
+                                    <th class="py-3 px-6">Waktu</th>
+                                    <th class="py-3 px-6">Kegiatan & Tempat</th>
+                                    <th class="py-3 px-6">Pegawai / Bidang</th>
+                                    <th class="py-3 px-6">Status</th>
+                                    <th class="py-3 px-6 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="agendaTableBody" class="divide-y divide-gray-200 text-sm text-gray-700">
+                                <!-- Data akan di-load otomatis dari LocalStorage via Javascript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL POP-UP TAMBAH AGENDA -->
+    <div id="modalTambahAgenda" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            <div class="p-5 border-b flex justify-between items-center bg-slate-50">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-plus text-blue-600"></i> Tambah Agenda Kedinasan
+                </h3>
+                <button onclick="tutupModalAgenda()" class="text-gray-400 hover:text-gray-600 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <form id="formAgenda" onsubmit="simpanAgendaBaru(event)" class="p-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nama Kegiatan</label>
+                    <input type="text" id="inputNamaKegiatan" placeholder="Contoh: Rapat Koordinasi..." required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Lokasi / Tempat</label>
+                    <input type="text" id="inputTempat" placeholder="Contoh: Aula Kantor DPPKBP3A" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Tanggal</label>
+                        <input type="date" id="inputTanggal" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">Waktu (WIB)</label>
+                        <input type="time" id="inputWaktu" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Pegawai / Penanggung Jawab / Bidang</label>
+                    <input type="text" id="inputBidang" placeholder="Contoh: Sekretariat / Bidang PPA" required class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Status Kegiatan</label>
+                    <select id="inputStatus" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                        <option value="Akan Datang">Akan Datang</option>
+                        <option value="Berlangsung">Berlangsung</option>
+                        <option value="Selesai">Selesai</option>
+                    </select>
+                </div>
+
+                <div class="pt-3 flex justify-end gap-2 border-t">
+                    <button type="button" onclick="tutupModalAgenda()" class="px-4 py-2 rounded-lg text-sm font-semibold text-gray-600 bg-gray-100 hover:bg-gray-200 transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition">
+                        Simpan Agenda
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPT SISTEM OTO-SIMPAN (LOCALSTORAGE) -->
+    <script>
+        // Data default bawaan jika memori masih kosong
+        const dataBawaan = [
+            {
+                id: 1,
+                waktu: "08:30 WIB",
+                tanggal: "01 Jun 2026",
+                nama: "Rapat Koordinasi Stunting",
+                tempat: "Aula Utama Kantor Bupati",
+                bidang: "Bidang Dalduk & KB",
+                status: "Berlangsung"
+            },
+            {
+                id: 2,
+                waktu: "13:00 WIB",
+                tanggal: "01 Jun 2026",
+                nama: "Sosialisasi Perlindungan Anak",
+                tempat: "Kecamatan Kuningan",
+                bidang: "Bidang PPA",
+                status: "Akan Datang"
+            }
+        ];
+
+        // 1. Ambil Data dari LocalStorage
+        function ambilAgenda() {
+            const dataDisimpan = localStorage.getItem('sigap_agendas');
+            if (!dataDisimpan) {
+                localStorage.setItem('sigap_agendas', JSON.stringify(dataBawaan));
+                return dataBawaan;
+            }
+            return JSON.parse(dataDisimpan);
+        }
+
+        // 2. Tampilkan Data ke Tabel
+        function renderTabelAgenda() {
+            const dataAgenda = ambilAgenda();
+            const tbody = document.getElementById('agendaTableBody');
+            tbody.innerHTML = '';
+
+            dataAgenda.forEach((agenda, index) => {
+                let badgeClass = "bg-blue-100 text-blue-800";
+                if (agenda.status === "Berlangsung") badgeClass = "bg-yellow-100 text-yellow-800";
+                if (agenda.status === "Selesai") badgeClass = "bg-emerald-100 text-emerald-800";
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="py-4 px-6">
+                        <span class="font-medium">${agenda.waktu}</span>
+                        <p class="text-xs text-gray-400">${agenda.tanggal}</p>
+                    </td>
+                    <td class="py-4 px-6">
+                        <p class="font-semibold text-gray-800">${agenda.nama}</p>
+                        <p class="text-xs text-gray-500">${agenda.tempat}</p>
+                    </td>
+                    <td class="py-4 px-6">${agenda.bidang}</td>
+                    <td class="py-4 px-6">
+                        <span class="${badgeClass} text-xs px-3 py-1 rounded-full font-medium">${agenda.status}</span>
+                    </td>
+                    <td class="py-4 px-6 text-center">
+                        <button onclick="hapusAgenda(${index})" class="text-red-500 hover:text-red-700 transition text-xs font-semibold">
+                            <i class="fa-solid fa-trash"></i> Hapus
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 3. Simpan Agenda Baru Permanen
+        function simpanAgendaBaru(event) {
+            event.preventDefault();
+
+            const agendaBaru = {
+                id: Date.now(),
+                nama: document.getElementById('inputNamaKegiatan').value,
+                tempat: document.getElementById('inputTempat').value,
+                tanggal: document.getElementById('inputTanggal').value,
+                waktu: document.getElementById('inputWaktu').value + " WIB",
+                bidang: document.getElementById('inputBidang').value,
+                status: document.getElementById('inputStatus').value
+            };
+
+            const dataAgenda = ambilAgenda();
+            dataAgenda.unshift(agendaBaru); // Tambah di paling atas
+            localStorage.setItem('sigap_agendas', JSON.stringify(dataAgenda));
+
+            renderTabelAgenda();
+            tutupModalAgenda();
+        }
+
+        // 4. Hapus Agenda jika salah input
+        function hapusAgenda(index) {
+            if (confirm("Apakah kamu yakin ingin menghapus agenda ini?")) {
+                const dataAgenda = ambilAgenda();
+                dataAgenda.splice(index, 1);
+                localStorage.setItem('sigap_agendas', JSON.stringify(dataAgenda));
+                renderTabelAgenda();
+            }
+        }
+
+        // Modal Controls
+        function bukaModalAgenda() {
+            document.getElementById('modalTambahAgenda').classList.remove('hidden');
+        }
+
+        function tutupModalAgenda() {
+            document.getElementById('modalTambahAgenda').classList.add('hidden');
+            document.getElementById('formAgenda').reset();
+        }
+
+        function lihatSemuaAgenda(event) {
+            event.preventDefault();
+            document.getElementById('section-tabel-agenda').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Load data otomatis saat pertama kali buka halaman
+        document.addEventListener('DOMContentLoaded', renderTabelAgenda);
+    </script>
+</body>
+</html>

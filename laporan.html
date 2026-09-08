@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Rekapitulasi - SIGAP DPPKBP3A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media print {
+            aside, header, .no-print {
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+            }
+            main {
+                padding: 0 !important;
+            }
+            .print-shadow-none {
+                box-shadow: none !important;
+                border: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col justify-between no-print">
+            <div>
+                <!-- Brand -->
+                <div class="h-16 flex items-center px-6 bg-slate-950 text-white font-bold text-lg gap-3">
+                    <i class="fa-solid fa-file-contract text-blue-500"></i>
+                    <span>SIGAP DPPKBP3A</span>
+                </div>
+                <!-- Nav Links -->
+                <nav class="p-4 space-y-1 text-sm">
+                    <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-chart-pie w-5"></i> Dashboard
+                    </a>
+                    <a href="datapegawai.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-users-gear w-5"></i> Data Pegawai
+                    </a>
+                    <a href="duk.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-id-card w-5"></i> DUK
+                    </a>
+                    <a href="kenaikan-pangkat.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-arrow-up-right-dots w-5"></i> Kenaikan Pangkat
+                    </a>
+                    <a href="penghargaan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-award w-5"></i> Penghargaan
+                    </a>
+                    <a href="pensiun.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-user-xmark w-5"></i> Pensiun
+                    </a>
+                    <a href="laporan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-medium">
+                        <i class="fa-solid fa-file-lines w-5"></i> Laporan
+                    </a>
+                </nav>
+            </div>
+            <!-- Settings & Logout -->
+            <div class="p-4 border-t border-slate-800 space-y-1">
+                <a href="pengaturan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-gear w-5"></i> Pengaturan
+                </a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-right-from-bracket w-5"></i> Keluar
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- Top Navbar -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 no-print">
+                <div class="flex items-center gap-4">
+                    <span class="font-semibold text-gray-700">Laporan Rekapitulasi Kepegawaian</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800">Admin Kepegawaian</p>
+                        <p class="text-xs text-gray-500">DPPKBP3A Kabupaten Kuningan</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                        A
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Laporan Content -->
+            <main class="p-6">
+                <!-- Action & Filter Bar -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 no-print">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Rekapitulasi Kenaikan Pangkat & Penghargaan</h2>
+                        <p class="text-sm text-gray-500">Ringkasan berkas pengajuan kenaikan pangkat dan usulan Tanda Kehormatan Satyalancana Karya Satya.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="periodeFilter" onchange="switchTahun(this.value)" class="bg-white border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                            <option value="2026" selected>Tahun Anggaran 2026</option>
+                            <option value="2025">Tahun Anggaran 2025</option>
+                        </select>
+                        <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-blue-700 shadow-sm flex items-center gap-2 transition">
+                            <i class="fa-solid fa-print"></i> Cetak Laporan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kop Surat Laporan (Tampil saat Print / Cetak) -->
+                <div class="hidden print:block text-center border-b-2 border-black pb-4 mb-6">
+                    <h3 class="text-lg font-bold uppercase">Pemerintah Kabupaten Kuningan</h3>
+                    <h2 class="text-xl font-extrabold uppercase">Dinas Pengendalian Penduduk, Keluarga Berencana, Pemberdayaan Perempuan dan Perlindungan Anak (DPPKBP3A)</h2>
+                    <p class="text-xs">Jl. Raya Cijoho No. 123, Kabupaten Kuningan, Jawa Barat | Telepon: (0232) 871234</p>
+                </div>
+
+                <!-- Ringkasan Stat Cards (Otomatis Terhitung/Terubah) -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm print-shadow-none">
+                        <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Usulan Pangkat (KP)</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mt-1" id="totalKP">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-emerald-200 bg-emerald-50/20 shadow-sm print-shadow-none">
+                        <p class="text-xs text-emerald-600 font-semibold uppercase tracking-wider">KP Disetujui / SK</p>
+                        <h3 class="text-2xl font-bold text-emerald-700 mt-1" id="approvedKP">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-purple-200 bg-purple-50/20 shadow-sm print-shadow-none">
+                        <p class="text-xs text-purple-600 font-semibold uppercase tracking-wider">Usulan Penghargaan</p>
+                        <h3 class="text-2xl font-bold text-purple-700 mt-1" id="totalPenghargaan">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-amber-200 bg-amber-50/20 shadow-sm print-shadow-none">
+                        <p class="text-xs text-amber-600 font-semibold uppercase tracking-wider">Penghargaan Masa Kerja (10/20/30 Th)</p>
+                        <h3 class="text-2xl font-bold text-amber-700 mt-1" id="satyaCount">0</h3>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: Rekapitulasi Kenaikan Pangkat -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8 print-shadow-none">
+                    <div class="bg-slate-900 text-white px-5 py-3 flex items-center justify-between">
+                        <h3 class="font-bold text-sm uppercase tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-up-right-dots text-blue-400"></i> Rekapitulasi Kenaikan Pangkat (KP)
+                        </h3>
+                        <span id="badgeKP" class="text-xs bg-slate-800 px-2.5 py-1 rounded border border-slate-700">Periode 2026</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-semibold border-b border-gray-200">
+                                    <th class="py-3 px-4 text-center">No</th>
+                                    <th class="py-3 px-4">NIP & Nama Pegawai</th>
+                                    <th class="py-3 px-4 text-center">Gol. Lama</th>
+                                    <th class="py-3 px-4 text-center">Gol. Baru (Usulan)</th>
+                                    <th class="py-3 px-4 text-center">Periode KP</th>
+                                    <th class="py-3 px-4 text-center">Status Berkas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableKP" class="divide-y divide-gray-200 text-sm text-gray-700">
+                                <!-- Rendered via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: Rekapitulasi Penghargaan -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden print-shadow-none">
+                    <div class="bg-slate-900 text-white px-5 py-3 flex items-center justify-between">
+                        <h3 class="font-bold text-sm uppercase tracking-wide flex items-center gap-2">
+                            <i class="fa-solid fa-award text-amber-400"></i> Rekapitulasi Usulan Tanda Kehormatan / Penghargaan
+                        </h3>
+                        <span id="badgePenghargaan" class="text-xs bg-slate-800 px-2.5 py-1 rounded border border-slate-700">Periode 2026</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-semibold border-b border-gray-200">
+                                    <th class="py-3 px-4 text-center">No</th>
+                                    <th class="py-3 px-4">NIP & Nama Pegawai</th>
+                                    <th class="py-3 px-4">Jenis Penghargaan</th>
+                                    <th class="py-3 px-4 text-center">Masa Kerja</th>
+                                    <th class="py-3 px-4 text-center">Tahun Usulan</th>
+                                    <th class="py-3 px-4 text-center">Status usulan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablePenghargaan" class="divide-y divide-gray-200 text-sm text-gray-700">
+                                <!-- Rendered via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tanda Tangan Cetak Laporan -->
+                <div class="hidden print:flex justify-end mt-12">
+                    <div class="text-center w-64">
+                        <p class="text-xs">Kuningan, 31 Agustus 2026</p>
+                        <p class="text-xs font-bold mt-1">Kepala DPPKBP3A Kabupaten Kuningan</p>
+                        <div class="h-16"></div>
+                        <p class="text-xs font-bold underline">H. APIP ROPI'I, Ners, S.Sos, S.KM, MMKes.</p>
+                        <p class="text-xs text-gray-600">NIP. 19700810 199002 1 001</p>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Script Data & Dynamic Logic -->
+    <script>
+        // Database Rekapitulasi berdasarkan Tahun Anggaran
+        const dbLaporan = {
+            "2026": {
+                kp: [
+                    { no: 1, nip: "19700810 199002 1 001", nama: "H. APIP ROPI'I, Ners, S.Sos, S.KM, MMKes.", gol_lama: "IV/b", gol_baru: "IV/c", periode: "April 2026", status: "SK Terbit" },
+                    { no: 2, nip: "19720301 200604 1 011", nama: "dr. EDDY SYARIEF, MM., MM.RS.", gol_lama: "IV/a", gol_baru: "IV/b", periode: "April 2026", status: "SK Terbit" },
+                    { no: 3, nip: "19791029 200501 1 003", nama: "ANWAR NASIHIN, S.Kom., M.Si.", gol_lama: "III/d", gol_baru: "IV/a", periode: "April 2026", status: "Proses BKN" },
+                    { no: 4, nip: "19810602 200801 1 006", nama: "ANTON SUPRAPTO, S.Kep.Ners. ,M.K.M.", gol_lama: "III/c", gol_baru: "III/d", periode: "Oktober 2026", status: "Verifikasi Berkas" },
+                    { no: 5, nip: "19741110 200801 1 018", nama: "H. NOVI PRIHAWAN, A.KS.", gol_lama: "III/c", gol_baru: "III/d", periode: "April 2026", status: "SK Terbit" },
+                    { no: 6, nip: "19760504 199901 2 001", nama: "IJAH HODIJAH, SE.", gol_lama: "III/b", gol_baru: "III/c", periode: "Oktober 2026", status: "Verifikasi Berkas" }
+                ],
+                penghargaan: [
+                    { no: 1, nip: "19700810 199002 1 001", nama: "H. APIP ROPI'I, Ners, S.Sos, S.KM, MMKes.", jenis: "Satyalancana Karya Satya XXX Tahun", masa_kerja: "30 Tahun", tahun: "2026", status: "Disetujui / Piagam Rilis" },
+                    { no: 2, nip: "19680823 199312 1 001", nama: "Drs. NANANG JUHANA", jenis: "Satyalancana Karya Satya XXX Tahun", masa_kerja: "30 Tahun", tahun: "2026", status: "Disetujui / Piagam Rilis" },
+                    { no: 3, nip: "19680911 199003 1 006", nama: "KOMARUDIN, SKM., MMKes.", jenis: "Satyalancana Karya Satya XXX Tahun", masa_kerja: "30 Tahun", tahun: "2026", status: "Proses Setneg" },
+                    { no: 4, nip: "19721010 200003 2 005", nama: "NUNUNG NURZAENAH, SE.", jenis: "Satyalancana Karya Satya XX Tahun", masa_kerja: "20 Tahun", tahun: "2026", status: "Disetujui / Piagam Rilis" },
+                    { no: 5, nip: "19801002 200501 1 008", nama: "DENI WAHYUDI PRIADI, SKM., M.A.P..", jenis: "Satyalancana Karya Satya XX Tahun", masa_kerja: "20 Tahun", tahun: "2026", status: "Proses Setneg" },
+                    { no: 6, nip: "19830827 200801 2 005", nama: "SITI NURJANAH, SE.", jenis: "Satyalancana Karya Satya X Tahun", masa_kerja: "10 Tahun", tahun: "2026", status: "Disetujui / Piagam Rilis" }
+                ]
+            },
+            "2025": {
+                kp: [
+                    { no: 1, nip: "19680823 199312 1 001", nama: "Drs. NANANG JUHANA", gol_lama: "III/d", gol_baru: "IV/a", periode: "April 2025", status: "SK Terbit" },
+                    { no: 2, nip: "19680911 199003 1 006", nama: "KOMARUDIN, SKM., MMKes.", gol_lama: "III/d", gol_baru: "IV/a", periode: "Oktober 2025", status: "SK Terbit" },
+                    { no: 3, nip: "19780416 200901 2 003", nama: "EUIS KOMARIAH, S.Pd., M.M.", gol_lama: "III/b", gol_baru: "III/c", periode: "April 2025", status: "SK Terbit" },
+                    { no: 4, nip: "19820512 201001 1 004", nama: "BUDI SANTOSO, ST.", gol_lama: "III/a", gol_baru: "III/b", periode: "Oktober 2025", status: "SK Terbit" }
+                ],
+                penghargaan: [
+                    { no: 1, nip: "19741110 200801 1 018", nama: "H. NOVI PRIHAWAN, A.KS.", jenis: "Satyalancana Karya Satya X Tahun", masa_kerja: "10 Tahun", tahun: "2025", status: "Disetujui / Piagam Rilis" },
+                    { no: 2, nip: "19791029 200501 1 003", nama: "ANWAR NASIHIN, S.Kom., M.Si.", jenis: "Satyalancana Karya Satya XX Tahun", masa_kerja: "20 Tahun", tahun: "2025", status: "Disetujui / Piagam Rilis" },
+                    { no: 3, nip: "19720301 200604 1 011", nama: "dr. EDDY SYARIEF, MM., MM.RS.", jenis: "Satyalancana Karya Satya XX Tahun", masa_kerja: "20 Tahun", tahun: "2025", status: "Disetujui / Piagam Rilis" }
+                ]
+            }
+        };
+
+        function renderLaporan(tahun) {
+            const currentData = dbLaporan[tahun];
+            if (!currentData) return;
+
+            // 1. Update Badges Header Tabel
+            document.getElementById('badgeKP').textContent = `Periode ${tahun}`;
+            document.getElementById('badgePenghargaan').textContent = `Periode ${tahun}`;
+
+            // 2. Render Tabel Kenaikan Pangkat
+            const tbodyKP = document.getElementById('tableKP');
+            tbodyKP.innerHTML = '';
+            let countApprovedKP = 0;
+
+            currentData.kp.forEach(item => {
+                if (item.status === 'SK Terbit') countApprovedKP++;
+                
+                let badgeClass = 'bg-amber-100 text-amber-800 border-amber-300';
+                if (item.status === 'SK Terbit') badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+                else if (item.status === 'Verifikasi Berkas') badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+                
+                tbodyKP.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-4 text-center font-bold text-slate-700 text-xs">${item.no}</td>
+                        <td class="py-3 px-4">
+                            <div class="font-bold text-gray-900">${item.nama}</div>
+                            <div class="text-xs text-gray-500 font-mono">${item.nip}</div>
+                        </td>
+                        <td class="py-3 px-4 text-center font-medium">${item.gol_lama}</td>
+                        <td class="py-3 px-4 text-center font-bold text-blue-700">${item.gol_baru}</td>
+                        <td class="py-3 px-4 text-center font-medium text-xs">${item.periode}</td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="border px-2 py-0.5 rounded text-xs font-semibold ${badgeClass}">
+                                ${item.status}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // 3. Render Tabel Penghargaan
+            const tbodyPenghargaan = document.getElementById('tablePenghargaan');
+            tbodyPenghargaan.innerHTML = '';
+            let countApprovedPenghargaan = 0;
+
+            currentData.penghargaan.forEach(item => {
+                if (item.status.includes('Disetujui')) countApprovedPenghargaan++;
+
+                let badgeClass = 'bg-purple-100 text-purple-800 border-purple-300';
+                if (item.status.includes('Disetujui')) badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+
+                tbodyPenghargaan.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-4 text-center font-bold text-slate-700 text-xs">${item.no}</td>
+                        <td class="py-3 px-4">
+                            <div class="font-bold text-gray-900">${item.nama}</div>
+                            <div class="text-xs text-gray-500 font-mono">${item.nip}</div>
+                        </td>
+                        <td class="py-3 px-4 font-semibold text-slate-800">${item.jenis}</td>
+                        <td class="py-3 px-4 text-center text-xs font-bold text-amber-700">${item.masa_kerja}</td>
+                        <td class="py-3 px-4 text-center font-medium text-xs">${item.tahun}</td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="border px-2 py-0.5 rounded text-xs font-semibold ${badgeClass}">
+                                ${item.status}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // 4. Update Ringkasan Stat Cards secara Otomatis
+            document.getElementById('totalKP').textContent = currentData.kp.length;
+            document.getElementById('approvedKP').textContent = countApprovedKP;
+            document.getElementById('totalPenghargaan').textContent = currentData.penghargaan.length;
+            document.getElementById('satyaCount').textContent = countApprovedPenghargaan;
+        }
+
+        // Trigger perubahan data ketika select option berganti
+        function switchTahun(tahun) {
+            renderLaporan(tahun);
+        }
+
+        // Render awal saat dokumen dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialYear = document.getElementById('periodeFilter').value;
+            renderLaporan(initialYear);
+        });
+    </script>
+</body>
+</html>

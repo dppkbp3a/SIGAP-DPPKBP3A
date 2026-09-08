@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pensiun Pegawai - SIGAP DPPKBP3A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col justify-between">
+            <div>
+                <!-- Brand -->
+                <div class="h-16 flex items-center px-6 bg-slate-950 text-white font-bold text-lg gap-3">
+                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+                    <span>SIGAP DPPKBP3A</span>
+                </div>
+                <!-- Nav Links -->
+                <nav class="p-4 space-y-1 text-sm">
+                    <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-chart-pie w-5"></i> Dashboard
+                    </a>
+                    <a href="datapegawai.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-users-gear w-5"></i> Data Pegawai
+                    </a>
+                    <a href="duk.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-id-card w-5"></i> DUK
+                    </a>
+                    <a href="kenaikan-pangkat.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-arrow-up-right-dots w-5"></i> Kenaikan Pangkat
+                    </a>
+                    <a href="penghargaan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-award w-5"></i> Penghargaan
+                    </a>
+                    <a href="pensiun.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white font-medium">
+                        <i class="fa-solid fa-user-xmark w-5"></i> Pensiun
+                    </a>
+                    <a href="laporan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-file-lines w-5"></i> Laporan
+                    </a>
+                </nav>
+            </div>
+            <!-- Settings & Logout -->
+            <div class="p-4 border-t border-slate-800 space-y-1">
+                <a href="pengaturan.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-gear w-5"></i> Pengaturan
+                </a>
+                <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-400 hover:bg-slate-800 transition text-sm">
+                    <i class="fa-solid fa-right-from-bracket w-5"></i> Keluar
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- Top Navbar -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10">
+                <div class="flex items-center gap-4">
+                    <span class="font-semibold text-gray-700">Proyeksi & Usulan Batas Usia Pensiun (BUP) Pegawai</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-gray-800">Admin Kepegawaian</p>
+                        <p class="text-xs text-gray-500">DPPKBP3A Kabupaten Kuningan</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                        A
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Pensiun Content -->
+            <main class="p-6">
+                <!-- Header Actions -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Daftar Usulan Pensiun Kepegawaian</h2>
+                        <p class="text-sm text-gray-500">Pemantauan jadwal Batas Usia Pensiun (BUP) dan pengajuan berkas usulan pensiun tepat waktu.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="window.print()" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-lg font-medium text-sm hover:bg-gray-50 shadow-sm flex items-center gap-2 transition">
+                            <i class="fa-solid fa-print text-blue-600"></i> Cetak Laporan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Highlight Stat Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Total Pegawai Terdata</p>
+                        <h3 class="text-2xl font-bold text-slate-800 mt-1" id="statTotal">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-red-200 bg-red-50/30 shadow-sm">
+                        <p class="text-xs text-red-600 font-semibold uppercase tracking-wider">Mendekati BUP (<= 2 Th)</p>
+                        <h3 class="text-2xl font-bold text-red-700 mt-1" id="statUrgent">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-amber-200 bg-amber-50/30 shadow-sm">
+                        <p class="text-xs text-amber-600 font-semibold uppercase tracking-wider" id="labelStatNear">Pensiun Periode Ini</p>
+                        <h3 class="text-2xl font-bold text-amber-700 mt-1" id="statNear">0</h3>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-emerald-200 bg-emerald-50/30 shadow-sm">
+                        <p class="text-xs text-emerald-600 font-semibold uppercase tracking-wider">Usia Senior (55+ Th)</p>
+                        <h3 class="text-2xl font-bold text-emerald-700 mt-1" id="statSenior">0</h3>
+                    </div>
+                </div>
+
+                <!-- Filter & Search Bar -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-6 flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                        <div class="relative w-full md:w-80">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                            <input type="text" id="searchInput" placeholder="Cari Nama atau NIP..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <select id="tahunFilter" class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="all">Semua Tahun Pensiun</option>
+                            <!-- Pilihan tahun diisi otomatis via JS -->
+                        </select>
+                    </div>
+                    <div class="text-xs text-gray-500 font-medium w-full md:w-auto text-right">
+                        Menampilkan <strong id="dataCount" class="text-gray-800">0</strong> Usulan Pegawai
+                    </div>
+                </div>
+
+                <!-- Table Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 text-white text-xs uppercase font-semibold">
+                                    <th class="py-3.5 px-4 text-center">No</th>
+                                    <th class="py-3.5 px-4">NIP</th>
+                                    <th class="py-3.5 px-4">Nama Lengkap</th>
+                                    <th class="py-3.5 px-4 text-center">Usia saat Ini</th>
+                                    <th class="py-3.5 px-4 text-center">TMT BUP</th>
+                                    <th class="py-3.5 px-4 text-center">Jadwal Usulan Pensiun</th>
+                                    <th class="py-3.5 px-4 text-center">Status Usulan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pensiunTableBody" class="divide-y divide-gray-200 text-sm text-gray-700">
+                                <!-- Data dirender via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script Render & Logic Dinamis -->
+    <script>
+        const dataPensiun = [
+            { no: 1, nip: "19700810 199002 1 001", nama: "H. APIP ROPI'I, Ners, S.Sos, S.KM, MMKes.", usia: "56", tmt_bup: "01-09-2030", usulan: "2029-09-01" },
+            { no: 2, nip: "19720301 200604 1 011", nama: "dr. EDDY SYARIEF, MM., MM.RS.", usia: "54", tmt_bup: "01-04-2030", usulan: "2029-04-01" },
+            { no: 3, nip: "19791029 200501 1 003", nama: "ANWAR NASIHIN, S.Kom., M.Si.", usia: "46", tmt_bup: "01-11-2037", usulan: "2036-11-01" },
+            { no: 4, nip: "19810602 200801 1 006", nama: "ANTON SUPRAPTO, S.Kep.Ners. ,M.K.M.", usia: "45", tmt_bup: "01-07-2039", usulan: "2038-07-01" },
+            { no: 5, nip: "19741110 200801 1 018", nama: "H. NOVI PRIHAWAN, A.KS.", usia: "51", tmt_bup: "01-12-2032", usulan: "2031-12-01" },
+            { no: 6, nip: "19760504 199901 2 001", nama: "IJAH HODIJAH, SE.", usia: "50", tmt_bup: "01-06-2034", usulan: "2033-06-01" },
+            { no: 7, nip: "19680823 199312 1 001", nama: "Drs. NANANG JUHANA", usia: "58", tmt_bup: "01-09-2026", usulan: "2025-09-01" },
+            { no: 8, nip: "19680911 199003 1 006", nama: "KOMARUDIN, SKM., MMKes.", usia: "57", tmt_bup: "01-10-2026", usulan: "2025-10-01" },
+            { no: 9, nip: "19780416 200901 2 003", nama: "EUIS KOMARIAH, S.Pd., M.M.", usia: "48", tmt_bup: "01-05-2036", usulan: "2035-05-01" },
+            { no: 10, nip: "19690215 199003 1 003", nama: "YAYAT SUDRAJAT, S.Pd.", usia: "57", tmt_bup: "01-03-2027", usulan: "2026-03-01" },
+            { no: 11, nip: "19810309 200604 2 018", nama: "INDRIASARI, S.Kep., Ners.", usia: "45", tmt_bup: "01-04-2039", usulan: "2038-04-01" },
+            { no: 12, nip: "19800612 200801 1 008", nama: "DIDIN AWALUDIN, S.Pd..", usia: "46", tmt_bup: "01-07-2038", usulan: "2037-07-01" },
+            { no: 13, nip: "19821102 200801 2 006", nama: "DINI NOVIANTI RATNA JUWITA, SE.", usia: "43", tmt_bup: "01-12-2040", usulan: "2039-12-01" },
+            { no: 14, nip: "19830827 200801 2 005", nama: "SITI NURJANAH, SE.", usia: "43", tmt_bup: "01-09-2041", usulan: "2040-09-01" },
+            { no: 15, nip: "19770512 201001 1 008", nama: "SAID, SH.", usia: "49", tmt_bup: "01-06-2035", usulan: "2034-06-01" },
+            { no: 16, nip: "19880112 201403 2 002", nama: "dr. ADHIANI KOESMAN", usia: "38", tmt_bup: "01-02-2046", usulan: "2045-02-01" },
+            { no: 17, nip: "19800720 200801 1 009", nama: "ERO JUHARA, S.AP.", usia: "46", tmt_bup: "01-08-2038", usulan: "2037-08-01" },
+            { no: 18, nip: "19801002 200501 1 008", nama: "DENI WAHYUDI PRIADI, SKM., M.A.P..", usia: "45", tmt_bup: "01-11-2038", usulan: "2037-11-01" },
+            { no: 19, nip: "19780512 201001 2 006", nama: "YOYOM SITI MARIAM, S.IP.", usia: "48", tmt_bup: "01-06-2036", usulan: "2035-06-01" },
+            { no: 20, nip: "19811107 200604 2 021", nama: "NOPA PUJIHASTUTI, SE., M.A.P.", usia: "44", tmt_bup: "01-12-2039", usulan: "2038-12-01" },
+            { no: 21, nip: "19800812 200801 2 006", nama: "ETI SUARTI, SE., M.Si.", usia: "46", tmt_bup: "01-09-2038", usulan: "2037-09-01" },
+            { no: 22, nip: "19690326 199503 2 001", nama: "Dra. NARUL HAYATI", usia: "57", tmt_bup: "01-04-2027", usulan: "2026-04-01" },
+            { no: 23, nip: "19721010 200003 2 005", nama: "NUNUNG NURZAENAH, SE.", usia: "53", tmt_bup: "01-11-2030", usulan: "2029-11-01" },
+            { no: 24, nip: "19800827 200801 1 005", nama: "DIKDIK MEDIAGUSDIANA, SE..", usia: "46", tmt_bup: "01-09-2038", usulan: "2037-09-01" },
+            { no: 25, nip: "19800615 200902 2 002", nama: "SRI YATI, SE.", usia: "46", tmt_bup: "01-07-2038", usulan: "2037-07-01" },
+            { no: 26, nip: "19830425 201101 1 001", nama: "HENDRA SUHENDRA, S.Sos.", usia: "43", tmt_bup: "01-05-2041", usulan: "2040-05-01" },
+            { no: 27, nip: "19770515 200801 1 008", nama: "JAJANG JARKASIH, S.AP.", usia: "49", tmt_bup: "01-06-2035", usulan: "2034-06-01" },
+            { no: 28, nip: "19780510 200801 2 015", nama: "EUIS NURMALA, SE.", usia: "48", tmt_bup: "01-06-2036", usulan: "2035-06-01" },
+            { no: 29, nip: "19790403 200701 1 009", nama: "UDIN MAHRUDIN, S.Sos.", usia: "47", tmt_bup: "01-05-2037", usulan: "2036-05-01" },
+            { no: 30, nip: "19800410 200902 2 003", nama: "NINA NURAFNI, S.Pd.", usia: "46", tmt_bup: "01-05-2038", usulan: "2037-05-01" },
+            { no: 31, nip: "19800720 200902 2 002", nama: "ELIS KARMANAH, S.Pd.", usia: "46", tmt_bup: "01-08-2038", usulan: "2037-08-01" },
+            { no: 32, nip: "19810612 200701 2 008", nama: "YENI MULYATI, SE.", usia: "45", tmt_bup: "01-07-2039", usulan: "2038-07-01" },
+            { no: 33, nip: "19810825 201001 1 009", nama: "MAS`UD, SE.", usia: "45", tmt_bup: "01-09-2039", usulan: "2038-09-01" },
+            { no: 34, nip: "19820516 200701 1 007", nama: "MAMAN SULAEMAN, S.IP., M.A.P..", usia: "44", tmt_bup: "01-06-2040", usulan: "2039-06-01" },
+            { no: 35, nip: "19830504 200902 1 002", nama: "NANAN HERDIAMAN, S.IP.", usia: "43", tmt_bup: "01-06-2041", usulan: "2040-06-01" },
+            { no: 36, nip: "19720302 200003 1 003", nama: "RADIMAN, S.IP.", usia: "54", tmt_bup: "01-04-2030", usulan: "2029-04-01" },
+            { no: 37, nip: "19800720 201001 2 006", nama: "TATI HERNAWATI, S.IP.", usia: "46", tmt_bup: "01-08-2038", usulan: "2037-08-01" },
+            { no: 38, nip: "19660103 199503 1 003", nama: "Drs. WAWAN IKHWANUDIN", usia: "60", tmt_bup: "01-02-2024", usulan: "2023-02-01" },
+            { no: 39, nip: "19790623 200501 1 007", nama: "UDI RUDI, S.Pd.,MM.", usia: "47", tmt_bup: "01-07-2037", usulan: "2036-07-01" },
+            { no: 40, nip: "19800227 200501 2 010", nama: "GINA MERANI SARIFIANTI, S.Sos.", usia: "46", tmt_bup: "01-03-2038", usulan: "2037-03-01" },
+            { no: 41, nip: "19730303 200701 2 012", nama: "KUSTINI, SE., MM.", usia: "53", tmt_bup: "01-04-2031", usulan: "2030-04-01" },
+            { no: 42, nip: "19750518 200604 1 013", nama: "H. RAHMAN, S.Sos.", usia: "51", tmt_bup: "01-06-2033", usulan: "2032-06-01" },
+            { no: 43, nip: "19790104 200902 2 001", nama: "LINA HERLINA, SE.", usia: "47", tmt_bup: "01-02-2037", usulan: "2036-02-01" },
+            { no: 44, nip: "19800109 200701 2 006", nama: "ENOK SUNDARSIH, SE.", usia: "46", tmt_bup: "01-02-2038", usulan: "2037-02-01" },
+            { no: 45, nip: "19820502 201001 2 008", nama: "IDA SUCIATI, S.IP.", usia: "44", tmt_bup: "01-06-2040", usulan: "2039-06-01" },
+            { no: 46, nip: "19821008 200701 1 005", nama: "UCI SANUSI, S.IP.", usia: "43", tmt_bup: "01-11-2040", usulan: "2039-11-01" },
+            { no: 47, nip: "19970923 202203 2 006", nama: "AYU SEKARDINI, S.KM.", usia: "28", tmt_bup: "01-10-2055", usulan: "2054-10-01" },
+            { no: 48, nip: "19851122 201001 2 021", nama: "TIA NURWULAN, S.E.", usia: "40", tmt_bup: "01-12-2043", usulan: "2042-12-01" },
+            { no: 49, nip: "19810708 201001 1 018", nama: "DEDE ALIMUDINSYAH, S.IP.", usia: "45", tmt_bup: "01-08-2039", usulan: "2038-08-01" },
+            { no: 50, nip: "19810803 200701 2 008", nama: "YANI SUPRIYANI", usia: "45", tmt_bup: "01-09-2039", usulan: "2038-09-01" },
+            { no: 51, nip: "19830822 201001 1 013", nama: "KOMARUDIN, SE.", usia: "43", tmt_bup: "01-09-2041", usulan: "2040-09-01" },
+            { no: 52, nip: "19860324 201403 1 002", nama: "TOTO SUGIANTO, S.IP.", usia: "40", tmt_bup: "01-04-2044", usulan: "2043-04-01" },
+            { no: 53, nip: "19800720 200801 2 016", nama: "AENI NURAENI", usia: "46", tmt_bup: "01-08-2038", usulan: "2037-08-01" },
+            { no: 54, nip: "19801005 200901 1 008", nama: "HERY HERYANTO", usia: "45", tmt_bup: "01-11-2038", usulan: "2037-11-01" },
+            { no: 55, nip: "19840226 201001 1 009", nama: "INDRA HARTONO", usia: "42", tmt_bup: "01-03-2042", usulan: "2041-03-01" },
+            { no: 56, nip: "19850529 201001 2 021", nama: "MELY MELIAWATI", usia: "41", tmt_bup: "01-06-2043", usulan: "2042-06-01" },
+            { no: 57, nip: "19780806 200901 1 008", nama: "SULAEMAN", usia: "48", tmt_bup: "01-09-2036", usulan: "2035-09-01" },
+            { no: 58, nip: "19790615 200901 1 008", nama: "SARYOMAN", usia: "47", tmt_bup: "01-07-2037", usulan: "2036-07-01" },
+            { no: 59, nip: "19850604 201001 1 024", nama: "DANI KURNIAWAN", usia: "41", tmt_bup: "01-07-2043", usulan: "2042-07-01" },
+            { no: 60, nip: "19820524 201403 1 001", nama: "INDRA CAHYA, S.Pd..", usia: "44", tmt_bup: "01-06-2040", usulan: "2039-06-01" },
+            { no: 61, nip: "19980512 202408 2 002", nama: "SISKA ANJAR LESTARY, S.KM.", usia: "28", tmt_bup: "01-06-2056", usulan: "2055-06-01" },
+            { no: 62, nip: "19940306 202408 1 002", nama: "OBY RIZKI BASKARA, S.E.", usia: "32", tmt_bup: "01-04-2052", usulan: "2051-04-01" },
+            { no: 63, nip: "19961028 202408 2 001", nama: "DIANA SRI WAHYUNI, S.Ak.", usia: "29", tmt_bup: "01-11-2054", usulan: "2053-11-01" },
+            { no: 64, nip: "19980205 202408 2 001", nama: "NISA NADILA FAJARINI, S.H..", usia: "28", tmt_bup: "01-03-2056", usulan: "2055-03-01" },
+            { no: 65, nip: "19930922 202408 2 001", nama: "SAPTINAH, S.Pd..", usia: "32", tmt_bup: "01-10-2051", usulan: "2050-10-01" },
+            { no: 66, nip: "19960714 202408 2 002", nama: "INDAH WULANSARI PURNAMANINGRUM, S.Pd.", usia: "30", tmt_bup: "01-08-2054", usulan: "2053-08-01" },
+            { no: 67, nip: "19980208 202408 2 001", nama: "FENY SUKMA ASIH, S.P..", usia: "28", tmt_bup: "01-03-2056", usulan: "2055-03-01" },
+            { no: 68, nip: "19970921 202408 1 001", nama: "DICKA FAHRUL ILMI", usia: "28", tmt_bup: "01-10-2055", usulan: "2054-10-01" },
+            { no: 69, nip: "19941103 202408 1 001", nama: "GIAN NURADITIYA, S.Pd.", usia: "31", tmt_bup: "01-12-2052", usulan: "2051-12-01" },
+            { no: 70, nip: "19830501 202408 1 001", nama: "DEDE SOPIYAN, SE..", usia: "43", tmt_bup: "01-06-2041", usulan: "2040-06-01" },
+            { no: 71, nip: "19980616 202408 2 002", nama: "RENANDRA ADLICA JUHITMAH, S.P..", usia: "28", tmt_bup: "01-07-2056", usulan: "2055-07-01" },
+            { no: 72, nip: "19830722 200701 1 005", nama: "TETEN NUGRAHA", usia: "43", tmt_bup: "01-08-2041", usulan: "2040-08-01" },
+            { no: 73, nip: "19860203 200701 1 003", nama: "MOCHAMAD RIDZAL FEBRYANA", usia: "40", tmt_bup: "01-03-2044", usulan: "2043-03-01" },
+            { no: 74, nip: "19861118 201001 2 008", nama: "IRMA SRIYANI, S.KM.", usia: "39", tmt_bup: "01-12-2044", usulan: "2043-12-01" },
+            { no: 75, nip: "19870710 201001 2 018", nama: "HELLI SUSANTI, S.I.Kom.", usia: "39", tmt_bup: "01-08-2045", usulan: "2044-08-01" },
+            { no: 76, nip: "19780816 200801 1 007", nama: "AGUS SUSANTO", usia: "48", tmt_bup: "01-09-2036", usulan: "2035-09-01" },
+            { no: 77, nip: "19800511 200801 2 007", nama: "MELA AMELIAWATI, S. Pd.", usia: "46", tmt_bup: "01-06-2038", usulan: "2037-06-01" },
+            { no: 78, nip: "19801211 200801 2 008", nama: "DESI INDRIANI", usia: "45", tmt_bup: "01-01-2039", usulan: "2038-01-01" },
+            { no: 79, nip: "19810427 200801 1 006", nama: "TAUFIK RACHMANDANI, S.AP.", usia: "45", tmt_bup: "01-05-2039", usulan: "2038-05-01" },
+            { no: 80, nip: "19940129 202408 2 001", nama: "RIZTNYA PAQUEENA ANANDYA, S.H..", usia: "32", tmt_bup: "01-02-2052", usulan: "2051-02-01" },
+            { no: 81, nip: "19910408 202408 2 001", nama: "TIKA APRILIYANI, S.Pd.", usia: "35", tmt_bup: "01-05-2049", usulan: "2048-05-01" },
+            { no: 82, nip: "19830707 200701 2 008", nama: "YANTHI YULIANTHI", usia: "43", tmt_bup: "01-08-2041", usulan: "2040-08-01" },
+            { no: 83, nip: "19780614 200801 1 008", nama: "DIDIN ROSIDIN, S.IP..", usia: "48", tmt_bup: "01-07-2036", usulan: "2035-07-01" },
+            { no: 84, nip: "19850614 200801 1 002", nama: "ANGGI TRIANSYAH, S.E..", usia: "41", tmt_bup: "01-07-2043", usulan: "2042-07-01" },
+            { no: 85, nip: "19780628 200701 1 007", nama: "YAN ROBIANSYAH", usia: "48", tmt_bup: "01-07-2036", usulan: "2035-07-01" },
+            { no: 86, nip: "19800609 200801 1 008", nama: "ARIS SUHERMAN", usia: "46", tmt_bup: "01-07-2038", usulan: "2037-07-01" },
+            { no: 87, nip: "19860309 201001 1 012", nama: "RICKY MAHARDIKA, S.E.", usia: "40", tmt_bup: "01-04-2044", usulan: "2043-04-01" },
+            { no: 88, nip: "19720815 200701 2 009", nama: "E. SITI NURLAELA", usia: "54", tmt_bup: "01-09-2030", usulan: "2029-09-01" },
+            { no: 89, nip: "19841029 200801 1 001", nama: "DWIKA BANON, S.Pd..", usia: "41", tmt_bup: "01-11-2042", usulan: "2041-11-01" },
+            { no: 90, nip: "19850227 201001 1 014", nama: "TITO RAHAYU BACHTIAR, S.Kom.", usia: "41", tmt_bup: "01-03-2043", usulan: "2042-03-01" },
+            { no: 91, nip: "19780210 200801 1 008", nama: "EKA GULIT TANGGUNG SUTARNO", usia: "48", tmt_bup: "01-03-2036", usulan: "2035-03-01" },
+            { no: 92, nip: "19800624 200801 1 008", nama: "RIZKI ALY SANTOSA", usia: "46", tmt_bup: "01-07-2038", usulan: "2037-07-01" },
+            { no: 93, nip: "19820521 200801 1 007", nama: "INDRA SURYA MANGGALA", usia: "44", tmt_bup: "01-06-2040", usulan: "2039-06-01" }
+        ];
+
+        // Ambil Tanggal dan Tahun Sistem
+        const today = new Date();
+        const currentYear = today.getFullYear();
+        const nextYear = currentYear + 1;
+
+        const pensiunTableBody = document.getElementById('pensiunTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const tahunFilter = document.getElementById('tahunFilter');
+        const dataCount = document.getElementById('dataCount');
+
+        // Populate Opsi Tahun Filter Secara Dinamis Berdasarkan Data
+        function populateFilterYears() {
+            const years = new Set();
+            dataPensiun.forEach(item => {
+                const year = parseInt(item.tmt_bup.split('-')[2]);
+                if (!isNaN(year)) years.add(year);
+            });
+
+            const sortedYears = Array.from(years).sort((a, b) => a - b);
+            tahunFilter.innerHTML = '<option value="all">Semua Tahun Pensiun</option>';
+            
+            sortedYears.forEach(year => {
+                const opt = document.createElement('option');
+                opt.value = year.toString();
+                opt.textContent = `Tahun BUP ${year}`;
+                tahunFilter.appendChild(opt);
+            });
+        }
+
+        // Hitung Usia Akurat berdasarkan NIP (8 Digit Pertama: YYYYMMDD)
+        function hitungUsiaDariNIP(nipStr, defaultUsia) {
+            const cleanNip = nipStr.replace(/\s+/g, '');
+            if (cleanNip.length >= 8) {
+                const birthYear = parseInt(cleanNip.substring(0, 4));
+                const birthMonth = parseInt(cleanNip.substring(4, 6)) - 1;
+                const birthDay = parseInt(cleanNip.substring(6, 8));
+
+                if (!isNaN(birthYear) && !isNaN(birthMonth) && !isNaN(birthDay)) {
+                    let age = currentYear - birthYear;
+                    const monthDiff = today.getMonth() - birthMonth;
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDay)) {
+                        age--;
+                    }
+                    return age;
+                }
+            }
+            return parseInt(defaultUsia);
+        }
+
+        function renderPensiun(data) {
+            pensiunTableBody.innerHTML = '';
+            dataCount.textContent = data.length;
+
+            // Label Kartu Periode Dinamis
+            document.getElementById('labelStatNear').textContent = `PENSIUN ${currentYear} - ${nextYear}`;
+
+            let countUrgent = 0;
+            let countNear = 0;
+            let countSenior = 0;
+
+            if (data.length === 0) {
+                pensiunTableBody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-gray-400">Data usulan pensiun tidak ditemukan.</td></tr>`;
+                return;
+            }
+
+            data.forEach((item) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+
+                const bupYear = parseInt(item.tmt_bup.split('-')[2]);
+                const usulanYear = parseInt(item.usulan.split('-')[0]);
+                const ageNum = hitungUsiaDariNIP(item.nip, item.usia);
+
+                // Hitung Statistik Berdasarkan Tahun Sistem
+                if (bupYear - currentYear <= 2 && bupYear >= currentYear) countUrgent++;
+                if (bupYear === currentYear || bupYear === nextYear) countNear++;
+                if (ageNum >= 55) countSenior++;
+
+                // Tag Status BUP Dinamis
+                let statusBadge = '<span class="bg-slate-100 text-slate-700 border-slate-300 border px-2 py-0.5 rounded text-xs font-semibold">Mendatang</span>';
+                
+                if (bupYear < currentYear) {
+                    statusBadge = '<span class="bg-gray-100 text-gray-600 border-gray-300 border px-2 py-0.5 rounded text-xs font-semibold">Telah Pensiun</span>';
+                } else if (usulanYear <= currentYear && bupYear >= currentYear) {
+                    statusBadge = '<span class="bg-red-100 text-red-800 border-red-300 border px-2 py-0.5 rounded text-xs font-bold animate-pulse">Siap Berkas (BUP)</span>';
+                } else if (usulanYear === nextYear) {
+                    statusBadge = '<span class="bg-amber-100 text-amber-800 border-amber-300 border px-2 py-0.5 rounded text-xs font-semibold">Persiapan Usulan</span>';
+                }
+
+                tr.innerHTML = `
+                    <td class="py-3.5 px-4 text-center font-bold text-slate-800 text-xs">${item.no}</td>
+                    <td class="py-3.5 px-4 font-mono text-xs text-gray-600">${item.nip}</td>
+                    <td class="py-3.5 px-4 font-bold text-gray-900">${item.nama}</td>
+                    <td class="py-3.5 px-4 text-center">
+                        <span class="inline-block px-2 py-0.5 rounded text-xs font-bold ${ageNum >= 55 ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-700'}">
+                            ${ageNum} Tahun
+                        </span>
+                    </td>
+                    <td class="py-3.5 px-4 text-center font-mono font-bold text-blue-700 text-xs">${item.tmt_bup}</td>
+                    <td class="py-3.5 px-4 text-center font-mono text-xs text-emerald-700 font-bold">${item.usulan}</td>
+                    <td class="py-3.5 px-4 text-center">${statusBadge}</td>
+                `;
+                pensiunTableBody.appendChild(tr);
+            });
+
+            // Update Statistik Cards
+            document.getElementById('statTotal').textContent = dataPensiun.length;
+            document.getElementById('statUrgent').textContent = countUrgent;
+            document.getElementById('statNear').textContent = countNear;
+            document.getElementById('statSenior').textContent = countSenior;
+        }
+
+        // Filter Logic
+        function filterData() {
+            const searchVal = searchInput.value.toLowerCase();
+            const tahunVal = tahunFilter.value;
+
+            const filtered = dataPensiun.filter(item => {
+                const matchSearch = item.nama.toLowerCase().includes(searchVal) || 
+                                    item.nip.toLowerCase().includes(searchVal);
+                
+                const bupYear = item.tmt_bup.split('-')[2];
+                let matchTahun = (tahunVal === 'all') || (bupYear === tahunVal);
+
+                return matchSearch && matchTahun;
+            });
+
+            renderPensiun(filtered);
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterData);
+        tahunFilter.addEventListener('change', filterData);
+
+        // Render Awal
+        document.addEventListener('DOMContentLoaded', () => {
+            populateFilterYears();
+            renderPensiun(dataPensiun);
+        });
+    </script>
+</body>
+</html>
